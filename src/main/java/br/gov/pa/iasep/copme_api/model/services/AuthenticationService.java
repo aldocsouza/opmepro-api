@@ -1,5 +1,6 @@
 package br.gov.pa.iasep.copme_api.model.services;
 
+import br.gov.pa.iasep.copme_api.exceptions.UnauthorizedException;
 import br.gov.pa.iasep.copme_api.infra.security.TokenService;
 import br.gov.pa.iasep.copme_api.model.entities.DTOs.LoginRequestDTO;
 import br.gov.pa.iasep.copme_api.model.entities.DTOs.LoginResponseDTO;
@@ -9,24 +10,22 @@ import br.gov.pa.iasep.copme_api.model.interfaces.mappers.UserMapper;
 import br.gov.pa.iasep.copme_api.model.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
-
-    private final UserRepository userRepository;
-    private final UserMapper userMapper;
-    private TokenService tokenService;
+public class AuthenticationService {
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public UserService(
-            UserRepository userRepository, UserMapper userMapper,
-            TokenService tokenService
-    ){
+    private final UserRepository userRepository;
+
+    private final UserMapper userMapper;
+
+    private final TokenService tokenService;
+
+    public AuthenticationService (UserRepository userRepository, UserMapper userMapper, TokenService tokenService){
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.tokenService = tokenService;
@@ -56,14 +55,14 @@ public class UserService {
     }
 
     public LoginResponseDTO login(LoginRequestDTO loginRequestDTO){
+        var user = (User) userRepository.findByUsername(loginRequestDTO.username());
 
-        var usernamePassword = new UsernamePasswordAuthenticationToken(loginRequestDTO.username(), loginRequestDTO.password());
-
-        var auth = this.authenticationManager.authenticate(usernamePassword);
-
-        var token = tokenService.generateToken((User) auth.getPrincipal());
-
-        return new LoginResponseDTO(token);
+        if (user != null && new BCryptPasswordEncoder().matches(loginRequestDTO.password(), user.getPassword())) {
+            var token = tokenService.generateToken(user);
+            return new LoginResponseDTO(token);
+        } else {
+            throw new UnauthorizedException("Usuário ou senha inválido!");
+        }
     }
 
 }
