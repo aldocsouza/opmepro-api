@@ -1,10 +1,9 @@
 package br.gov.pa.iasep.copme_api.model.services;
 
 import br.gov.pa.iasep.copme_api.exceptions.UnauthorizedException;
+import br.gov.pa.iasep.copme_api.exceptions.UserAlreadyExistsException;
 import br.gov.pa.iasep.copme_api.infra.security.TokenService;
-import br.gov.pa.iasep.copme_api.model.entities.DTOs.LoginRequestDTO;
-import br.gov.pa.iasep.copme_api.model.entities.DTOs.LoginResponseDTO;
-import br.gov.pa.iasep.copme_api.model.entities.DTOs.RequestUserDTO;
+import br.gov.pa.iasep.copme_api.model.entities.DTOs.*;
 import br.gov.pa.iasep.copme_api.model.entities.User;
 import br.gov.pa.iasep.copme_api.model.interfaces.mappers.UserMapper;
 import br.gov.pa.iasep.copme_api.model.repositories.UserRepository;
@@ -31,11 +30,11 @@ public class AuthenticationService {
         this.tokenService = tokenService;
     }
 
-    public String createAccountService(RequestUserDTO userDto){
-        if(userRepository.findByUsername(userDto.username()) != null) throw new IllegalArgumentException("Já existe um usuário com o login informado");
-        if(userRepository.findByCpf(userDto.cpf()) != null) throw new IllegalArgumentException("Já existe um usuário com o CPF informado");
-        if(userRepository.findByEmail(userDto.email()) != null)  throw new IllegalArgumentException("Já existe um usuário com o e-mail informado");
-        if(userRepository.findByRegistration(userDto.registration()) != null) throw new IllegalArgumentException("Já existe um usuário com a matrícula informada");
+    public ApiResponse createAccountService(RequestUserDTO userDto){
+        if(userRepository.findByUsername(userDto.username()) != null) throw new UserAlreadyExistsException("Já existe um usuário com o login informado");
+        if(userRepository.findByCpf(userDto.cpf()) != null) throw new UserAlreadyExistsException("Já existe um usuário com o CPF informado");
+        if(userRepository.findByEmail(userDto.email()) != null)  throw new UserAlreadyExistsException("Já existe um usuário com o e-mail informado");
+        if(userRepository.findByRegistration(userDto.registration()) != null) throw new UserAlreadyExistsException("Já existe um usuário com a matrícula informada");
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(userDto.password());
         User user = new User(
@@ -51,7 +50,7 @@ public class AuthenticationService {
         );
         userRepository.save(user);
 
-        return "Usuário cadastrado com sucesso!";
+        return new ApiResponse("Usuário cadastrado com sucesso!", true);
     }
 
     public LoginResponseDTO login(LoginRequestDTO loginRequestDTO){
