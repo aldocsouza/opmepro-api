@@ -1,17 +1,12 @@
 package br.gov.pa.iasep.copme_api.controller;
 
-import br.gov.pa.iasep.copme_api.model.entities.DTOs.LoginRequestDTO;
-import br.gov.pa.iasep.copme_api.model.entities.DTOs.LoginResponseDTO;
-import br.gov.pa.iasep.copme_api.model.entities.DTOs.RequestUserDTO;
+import br.gov.pa.iasep.copme_api.model.entities.DTOs.*;
 import br.gov.pa.iasep.copme_api.model.services.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -27,10 +22,9 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerAccount(@RequestBody @Valid RequestUserDTO user){
-        return ResponseEntity.status(HttpStatus.CREATED).body(
-                authenticationService.createAccountService(user)
-        );
+    public ResponseEntity<ApiResponse> registerAccount(@RequestBody @Valid RequestUserDTO user){
+        ApiResponse register = authenticationService.createAccountService(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(register);
     }
 
 }
