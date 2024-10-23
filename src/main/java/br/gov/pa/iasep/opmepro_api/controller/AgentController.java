@@ -4,6 +4,7 @@ import br.gov.pa.iasep.opmepro_api.model.dtos.UserAgentDTOs.ResponseAgentDTO;
 import br.gov.pa.iasep.opmepro_api.services.AgentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +20,7 @@ public class AgentController {
         this.agentService = agentService;
     }
 
+    @GetMapping("/agents")
     public ResponseEntity<List<ResponseAgentDTO>> getAllAgents(){
         return ResponseEntity.status(HttpStatus.OK).body(agentService.getAllAgents());
     }
