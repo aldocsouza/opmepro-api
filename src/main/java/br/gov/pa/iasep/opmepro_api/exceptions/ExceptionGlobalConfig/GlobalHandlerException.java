@@ -1,5 +1,6 @@
 package br.gov.pa.iasep.opmepro_api.exceptions.ExceptionGlobalConfig;
 
+import br.gov.pa.iasep.opmepro_api.exceptions.FeatureAlreadyExistsException;
 import br.gov.pa.iasep.opmepro_api.exceptions.UnauthorizedException;
 import br.gov.pa.iasep.opmepro_api.exceptions.UserAlreadyExistsException;
 import br.gov.pa.iasep.opmepro_api.exceptions.UserNotFoundException;
@@ -31,6 +32,13 @@ public class GlobalHandlerException {
         Map<String, String> errorResponse = new HashMap<>();
         errorResponse.put("message", ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(FeatureAlreadyExistsException.class)
+    public ResponseEntity<Map<String, String>> handleFeatureAlreadyExistsException(FeatureAlreadyExistsException ex){
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("message", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 
 }

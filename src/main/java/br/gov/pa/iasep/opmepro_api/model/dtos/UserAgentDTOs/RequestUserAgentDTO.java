@@ -1,10 +1,13 @@
 package br.gov.pa.iasep.opmepro_api.model.dtos.UserAgentDTOs;
 
+import br.gov.pa.iasep.opmepro_api.model.entities.AgentFeature;
+import br.gov.pa.iasep.opmepro_api.model.entities.SessionHistoryAgent;
 import br.gov.pa.iasep.opmepro_api.model.enums.UserRole;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record RequestUserAgentDTO(
 
@@ -38,6 +41,10 @@ public record RequestUserAgentDTO(
         @NotNull
         UserRole role,
 
-        LocalDateTime lastSession
+        LocalDateTime lastSession,
+
+        List<SessionHistoryAgent> sessionHistoryAgents,
+
+        List<AgentFeature> agentFeatures
 ) {
 }
