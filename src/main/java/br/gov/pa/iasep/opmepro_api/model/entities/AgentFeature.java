@@ -1,6 +1,7 @@
 package br.gov.pa.iasep.opmepro_api.model.entities;
 
 import br.gov.pa.iasep.opmepro_api.base.UserFeature;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

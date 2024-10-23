@@ -1,9 +1,6 @@
 package br.gov.pa.iasep.opmepro_api.exceptions.ExceptionGlobalConfig;
 
-import br.gov.pa.iasep.opmepro_api.exceptions.FeatureAlreadyExistsException;
-import br.gov.pa.iasep.opmepro_api.exceptions.UnauthorizedException;
-import br.gov.pa.iasep.opmepro_api.exceptions.UserAlreadyExistsException;
-import br.gov.pa.iasep.opmepro_api.exceptions.UserNotFoundException;
+import br.gov.pa.iasep.opmepro_api.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -39,6 +36,13 @@ public class GlobalHandlerException {
         Map<String, String> errorResponse = new HashMap<>();
         errorResponse.put("message", ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(FeatureNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleFeatureNotFoundException(FeatureNotFoundException ex){
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("message", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
 }

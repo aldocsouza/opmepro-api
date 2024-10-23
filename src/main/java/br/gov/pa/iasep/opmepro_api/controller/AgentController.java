@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/agent")
+@RequestMapping("/api/agents")
 public class AgentController {
 
     private final AgentService agentService;
@@ -20,7 +20,7 @@ public class AgentController {
         this.agentService = agentService;
     }
 
-    @GetMapping("/agents")
+    @GetMapping("/all-agents")
     public ResponseEntity<List<ResponseAgentDTO>> getAllAgents(){
         return ResponseEntity.status(HttpStatus.OK).body(agentService.getAllAgents());
     }

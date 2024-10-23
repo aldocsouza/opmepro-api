@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/feature")
+@RequestMapping("/api/features")
 public class FeatureController {
 
     private final FeatureService featureService;
@@ -20,7 +20,7 @@ public class FeatureController {
         this.featureService = featureService;
     }
 
-    @GetMapping("/features")
+    @GetMapping("/all-features")
     public ResponseEntity<List<Feature>> getAllFeatures(){
         return ResponseEntity.status(HttpStatus.OK).body(featureService.getAllFeatures());
     }

@@ -2,6 +2,10 @@ package br.gov.pa.iasep.opmepro_api.model.entities;
 
 import br.gov.pa.iasep.opmepro_api.base.User;
 import br.gov.pa.iasep.opmepro_api.model.enums.UserRole;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

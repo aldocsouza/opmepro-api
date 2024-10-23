@@ -1,6 +1,8 @@
 package br.gov.pa.iasep.opmepro_api.base;
 
 import br.gov.pa.iasep.opmepro_api.model.entities.Feature;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
