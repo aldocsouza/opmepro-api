@@ -1,4 +1,4 @@
-package br.gov.pa.iasep.opmepro_api.model.entities.DTOs;
+package br.gov.pa.iasep.opmepro_api.model.dtos.UserDTOs;
 
 import br.gov.pa.iasep.opmepro_api.model.enums.UserRole;
 import jakarta.validation.constraints.NotNull;

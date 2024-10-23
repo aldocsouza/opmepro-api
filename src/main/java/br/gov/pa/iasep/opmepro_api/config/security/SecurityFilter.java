@@ -1,6 +1,7 @@
-package br.gov.pa.iasep.opmepro_api.infra.security;
+package br.gov.pa.iasep.opmepro_api.config.security;
 
-import br.gov.pa.iasep.opmepro_api.model.repositories.UserRepository;
+import br.gov.pa.iasep.opmepro_api.repositories.AgentUserRepository;
+import br.gov.pa.iasep.opmepro_api.repositories.RegularUserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,17 +22,22 @@ public class SecurityFilter extends OncePerRequestFilter {
     TokenService tokenService;
 
     @Autowired
-    UserRepository userRepository;
+    AgentUserRepository agentUserRepository;
+
+    @Autowired
+    RegularUserRepository regularUserRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var token = this.recoverToken(request);
         if(token != null){
             var username = tokenService.validateToken(token);
-            UserDetails user = userRepository.findByUsername(username);
+            UserDetails user = findUserByUsername(username);
 
-            var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            if (user != null) {
+                var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
         }
         filterChain.doFilter(request, response);
     }
@@ -40,5 +46,17 @@ public class SecurityFilter extends OncePerRequestFilter {
         var authHeader = request.getHeader("Authorization");
         if (authHeader == null) return null;
         return authHeader.replace("Bearer ", "");
+    }
+
+    private UserDetails findUserByUsername(String username) {
+        // Tenta encontrar um AgentUser
+        UserDetails user = agentUserRepository.findByUsername(username);
+
+        // Se não encontrou, tenta encontrar um RegularUser
+        if (user == null) {
+            user = regularUserRepository.findByUsername(username);
+        }
+
+        return user; // Retorna o usuário encontrado ou null
     }
 }

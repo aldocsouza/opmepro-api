@@ -1,7 +1,10 @@
-package br.gov.pa.iasep.opmepro_api.infra.security;
+package br.gov.pa.iasep.opmepro_api.config.security;
 
-import br.gov.pa.iasep.opmepro_api.model.entities.User;
+import br.gov.pa.iasep.opmepro_api.base.User;
+import br.gov.pa.iasep.opmepro_api.model.entities.AgentUser;
+import br.gov.pa.iasep.opmepro_api.model.entities.RegularUser;
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,21 +24,29 @@ public class TokenService {
     public String generateToken(User user){
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
-            String token = JWT.create()
+            JWTCreator.Builder jwtBuilder = JWT.create()
                     .withIssuer("opmepro-api")
                     .withSubject(user.getUsername())
-                    .withClaim("id", user.getId())
-                    .withClaim("fullName", user.getFullName())
+                    .withClaim("name", user.getName())
                     .withClaim("cpf", user.getCpf())
-                    .withClaim("registration", user.getRegistration())
                     .withClaim("phone", user.getPhone())
-                    .withClaim("role", user.getRole().toString())
                     .withClaim("email", user.getEmail())
-                    .withClaim("situation", user.getSituation())
-                    .withExpiresAt(generateExpirationDate())
-                    .sign(algorithm);
+                    .withClaim("role", user.getRole().toString())
+                    .withClaim("status", user.getStatus())
+                    .withClaim("lastSession", user.getLastSession().toString())
+                    .withExpiresAt(generateExpirationDate());
 
-            return token;
+                    if (user instanceof AgentUser) {
+                        AgentUser agentUser = (AgentUser) user;
+                        jwtBuilder.withClaim("code", agentUser.getCode());
+                        jwtBuilder.withClaim("registry", agentUser.getRegistry());
+                        jwtBuilder.withClaim("affiliation", agentUser.getAffiliation());
+                    } else if (user instanceof RegularUser) {
+                        RegularUser regularUser = (RegularUser) user;
+                        jwtBuilder.withClaim("code", regularUser.getCode());
+                    }
+
+            return jwtBuilder.sign(algorithm);
         }catch (JWTCreationException exception){
             throw new RuntimeException("Erro na geração do token");
         }
