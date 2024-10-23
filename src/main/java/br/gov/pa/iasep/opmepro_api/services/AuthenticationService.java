@@ -2,12 +2,17 @@ package br.gov.pa.iasep.opmepro_api.services;
 
 import br.gov.pa.iasep.opmepro_api.base.User;
 import br.gov.pa.iasep.opmepro_api.config.security.TokenService;
+import br.gov.pa.iasep.opmepro_api.exceptions.UnauthorizedException;
 import br.gov.pa.iasep.opmepro_api.exceptions.UserAlreadyExistsException;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
+import br.gov.pa.iasep.opmepro_api.model.dtos.LoginDTOs.LoginRequestDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.LoginDTOs.LoginResponseDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UserAgentDTOs.RequestUserAgentDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.AgentUser;
+import br.gov.pa.iasep.opmepro_api.model.entities.RegularUser;
 import br.gov.pa.iasep.opmepro_api.model.interfaces.mappers.AgentMapper;
 import br.gov.pa.iasep.opmepro_api.repositories.AgentUserRepository;
+import br.gov.pa.iasep.opmepro_api.repositories.RegularUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,12 +26,15 @@ public class AuthenticationService {
 
     private final AgentUserRepository agentUserRepository;
 
+    private final RegularUserRepository regularUserRepository;
+
     private final AgentMapper agentMapper;
 
     private final TokenService tokenService;
 
-    public AuthenticationService (AgentUserRepository agentUserRepository, AgentMapper agentMapper, TokenService tokenService){
+    public AuthenticationService (AgentUserRepository agentUserRepository, RegularUserRepository regularUserRepository, AgentMapper agentMapper, TokenService tokenService){
         this.agentUserRepository = agentUserRepository;
+        this.regularUserRepository = regularUserRepository;
         this.agentMapper = agentMapper;
         this.tokenService = tokenService;
     }
@@ -59,42 +67,19 @@ public class AuthenticationService {
     }
 
 
-//    public ApiResponse createAccountService(RequestUserDTO userDto){
-//        if(userRepository.findByUsername(userDto.username()) != null) throw new UserAlreadyExistsException("Já existe um usuário com o login informado");
-//        if(userRepository.findByCpf(userDto.cpf()) != null) throw new UserAlreadyExistsException("Já existe um usuário com o CPF informado");
-//        if(userRepository.findByEmail(userDto.email()) != null)  throw new UserAlreadyExistsException("Já existe um usuário com o e-mail informado");
-//        if(userRepository.findByRegistration(userDto.registration()) != null) throw new UserAlreadyExistsException("Já existe um usuário com a matrícula informada");
-//
-//        String encryptedPassword = new BCryptPasswordEncoder().encode(userDto.password());
-//        User user = new User(
-//                userDto.fullName(),
-//                userDto.cpf(),
-//                userDto.registration(),
-//                userDto.email(),
-//                userDto.phone(),
-//                userDto.username(),
-//                encryptedPassword,
-//                userDto.situation(),
-//                userDto.role()
-//        );
-//        userRepository.save(user);
-//
-//        return new ApiResponse("Usuário cadastrado com sucesso!", true);
-//    }
+    public LoginResponseDTO login(LoginRequestDTO loginRequestDTO){
+        User user = (AgentUser) agentUserRepository.findByUsername(loginRequestDTO.username());
 
+        if(user == null){
+            user = (RegularUser) regularUserRepository.findByUsername(loginRequestDTO.username());
+        }
 
-
-
-//
-//    public LoginResponseDTO login(LoginRequestDTO loginRequestDTO){
-//        var user = (User) userRepository.findByUsername(loginRequestDTO.username());
-//
-//        if (user != null && new BCryptPasswordEncoder().matches(loginRequestDTO.password(), user.getPassword())) {
-//            var token = tokenService.generateToken(user);
-//            return new LoginResponseDTO(token);
-//        } else {
-//            throw new UnauthorizedException("Usuário ou senha inválido!");
-//        }
-//    }
+        if (user != null && new BCryptPasswordEncoder().matches(loginRequestDTO.password(), user.getPassword())) {
+            var token = tokenService.generateToken(user);
+            return new LoginResponseDTO(token);
+        } else {
+            throw new UnauthorizedException("Usuário ou senha inválido!");
+        }
+    }
 
 }

@@ -6,10 +6,9 @@ import br.gov.pa.iasep.opmepro_api.model.entities.Feature;
 import br.gov.pa.iasep.opmepro_api.services.FeatureService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/feature")
@@ -19,6 +18,11 @@ public class FeatureController {
 
     public FeatureController(FeatureService featureService){
         this.featureService = featureService;
+    }
+
+    @GetMapping("/features")
+    public ResponseEntity<List<Feature>> getAllFeatures(){
+        return ResponseEntity.status(HttpStatus.OK).body(featureService.getAllFeatures());
     }
 
     @PostMapping("/create-feature")

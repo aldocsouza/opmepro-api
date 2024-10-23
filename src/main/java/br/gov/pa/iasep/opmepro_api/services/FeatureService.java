@@ -6,6 +6,8 @@ import br.gov.pa.iasep.opmepro_api.model.entities.Feature;
 import br.gov.pa.iasep.opmepro_api.repositories.FeatureRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FeatureService {
 
@@ -15,6 +17,10 @@ public class FeatureService {
         this.featureRepository = featureRepository;
     }
 
+    public List<Feature> getAllFeatures(){
+        return featureRepository.findAll();
+    }
+
     public ApiResponse createFeature(RequestFeatureDTO feature){
         Feature newFeature = new Feature();
         newFeature.setDescription(feature.description());
@@ -22,5 +28,7 @@ public class FeatureService {
 
         return new ApiResponse("Cadastro realizado com sucesso!", true);
     }
+
+
 
 }
