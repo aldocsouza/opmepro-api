@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record RequestUserAgentDTO(
+public record RequestAgentDTO(
 
         @NotNull @NotBlank
         String name,

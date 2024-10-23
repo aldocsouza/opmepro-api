@@ -7,7 +7,7 @@ import br.gov.pa.iasep.opmepro_api.exceptions.UserAlreadyExistsException;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.dtos.LoginDTOs.LoginRequestDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.LoginDTOs.LoginResponseDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UserAgentDTOs.RequestUserAgentDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UserAgentDTOs.RequestAgentDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.AgentUser;
 import br.gov.pa.iasep.opmepro_api.model.entities.RegularUser;
 import br.gov.pa.iasep.opmepro_api.model.interfaces.mappers.AgentMapper;
@@ -39,7 +39,7 @@ public class AuthenticationService {
         this.tokenService = tokenService;
     }
 
-    public ApiResponse createAgentAccount(RequestUserAgentDTO userDto){
+    public ApiResponse createAgentAccount(RequestAgentDTO userDto){
         if(agentUserRepository.findByUsername(userDto.username()) != null) throw new UserAlreadyExistsException("Já existe um usuário com o login informado");
         if(agentUserRepository.findByCpf(userDto.cpf()) != null) throw new UserAlreadyExistsException("Já existe um usuário com o CPF informado");
         if(agentUserRepository.findByEmail(userDto.email()) != null)  throw new UserAlreadyExistsException("Já existe um usuário com o e-mail informado");

@@ -3,8 +3,7 @@ package br.gov.pa.iasep.opmepro_api.controller;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.dtos.LoginDTOs.LoginRequestDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.LoginDTOs.LoginResponseDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UserAgentDTOs.RequestUserAgentDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UserDTOs.RequestUserDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UserAgentDTOs.RequestAgentDTO;
 import br.gov.pa.iasep.opmepro_api.services.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register-user-agent")
-    public ResponseEntity<ApiResponse> registerUserAgentAccount(@RequestBody @Valid RequestUserAgentDTO userAgent){
+    public ResponseEntity<ApiResponse> registerUserAgentAccount(@RequestBody @Valid RequestAgentDTO userAgent){
         ApiResponse register = authenticationService.createAgentAccount(userAgent);
         return ResponseEntity.status(HttpStatus.CREATED).body(register);
     }
