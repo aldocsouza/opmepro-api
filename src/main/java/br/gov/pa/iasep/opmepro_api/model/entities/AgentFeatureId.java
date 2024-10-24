@@ -10,6 +10,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AgentFeatureId implements Serializable {
-    private Integer agentCode;
-    private Integer featureCode;
+    private Integer agent;
+    private Integer feature;
 }

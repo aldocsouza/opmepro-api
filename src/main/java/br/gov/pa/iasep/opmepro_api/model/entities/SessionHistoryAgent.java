@@ -19,12 +19,12 @@ public class SessionHistoryAgent extends SessionHistory {
 
     @ManyToOne
     @JoinColumn(name = "cod_agente", nullable = false)
-    private AgentUser agentCode;
+    private AgentUser agent;
 
-    public SessionHistoryAgent(Integer code, AgentUser agentCode, LocalDateTime login_date, LocalDateTime logout_date, String ipAddress, LocalDateTime updatedAt) {
+    public SessionHistoryAgent(Integer code, AgentUser agent, LocalDateTime login_date, LocalDateTime logout_date, String ipAddress, LocalDateTime updatedAt) {
         super(login_date, logout_date, ipAddress, updatedAt);
         this.code = code;
-        this.agentCode = agentCode;
+        this.agent = agent;
     }
 
 }

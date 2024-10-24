@@ -13,13 +13,13 @@ import lombok.Setter;
 public class RegularUserFeature extends UserFeature {
 
     @Id
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_cod_usuario", nullable = false)
-    private RegularUser userCode;
+    private RegularUser regularUser;
 
-    public RegularUserFeature(RegularUser userCode, Feature featureCode, Boolean reading, Boolean writing) {
+    public RegularUserFeature(RegularUser regularUser, Feature featureCode, Boolean reading, Boolean writing) {
         super(featureCode, reading, writing);
-        this.userCode = userCode;
+        this.regularUser = regularUser;
     }
 
     public RegularUserFeature() {

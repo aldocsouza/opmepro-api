@@ -10,6 +10,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegularUserFeatureId implements Serializable {
-    private Integer userCode;
-    private Integer featureCode;
+    private Integer regularUser;
+    private Integer feature;
 }

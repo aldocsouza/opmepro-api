@@ -3,6 +3,8 @@ package br.gov.pa.iasep.opmepro_api.base;
 import br.gov.pa.iasep.opmepro_api.model.entities.Feature;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
@@ -11,9 +13,9 @@ import lombok.NoArgsConstructor;
 public abstract class UserFeature {
 
     @Id
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "funcionalidade_cod_funcionalidade", nullable = false)
-    private Feature featureCode;
+    private Feature feature;
 
     @Column(name = "leitura", nullable = false)
     private Boolean reading;
@@ -21,18 +23,18 @@ public abstract class UserFeature {
     @Column(name = "escrita", nullable = false)
     private Boolean writing;
 
-    public UserFeature(Feature featureCode, Boolean reading, Boolean writing) {
-        this.featureCode = featureCode;
+    public UserFeature(Feature feature, Boolean reading, Boolean writing) {
+        this.feature = feature;
         this.reading = reading;
         this.writing = writing;
     }
 
-    public Feature getFeatureCode() {
-        return featureCode;
+    public Feature getFeature() {
+        return feature;
     }
 
-    public void setFeatureCode(Feature featureCode) {
-        this.featureCode = featureCode;
+    public void setFeature(Feature feature) {
+        this.feature = feature;
     }
 
     public Boolean getReading() {

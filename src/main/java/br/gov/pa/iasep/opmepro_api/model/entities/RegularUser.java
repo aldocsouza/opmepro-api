@@ -21,10 +21,10 @@ public class RegularUser extends User {
     @Column(name = "cod_usuario", nullable = false, length = 11)
     private Integer code;
 
-    @OneToMany(mappedBy = "userCode", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "regularUser", cascade = CascadeType.ALL, orphanRemoval = true)
     List<RegularUserFeature> regularUserFeatures = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userCode", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "regularUser", cascade = CascadeType.ALL)
     List<SessionHistoryRegularUser> sessionHistoryRegularUsers = new ArrayList<>();
 
     public RegularUser(Integer code, String name, String cpf, String username, String password, String phone, String email, Boolean status, UserRole role, LocalDateTime lastSession) {

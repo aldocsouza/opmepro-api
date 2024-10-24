@@ -1,7 +1,5 @@
-package br.gov.pa.iasep.opmepro_api.model.dtos;
+package br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs;
 
-import br.gov.pa.iasep.opmepro_api.model.entities.AgentUser;
-import br.gov.pa.iasep.opmepro_api.model.entities.Feature;
 import jakarta.validation.constraints.NotNull;
 
 public record RequestAgentFeatureDTO(

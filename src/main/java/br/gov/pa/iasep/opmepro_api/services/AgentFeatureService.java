@@ -2,7 +2,7 @@ package br.gov.pa.iasep.opmepro_api.services;
 
 import br.gov.pa.iasep.opmepro_api.exceptions.FeatureNotFoundException;
 import br.gov.pa.iasep.opmepro_api.exceptions.UserNotFoundException;
-import br.gov.pa.iasep.opmepro_api.model.dtos.RequestAgentFeatureDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.RequestAgentFeatureDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.AgentFeature;
 import br.gov.pa.iasep.opmepro_api.model.entities.AgentUser;
 import br.gov.pa.iasep.opmepro_api.model.entities.Feature;
@@ -34,8 +34,8 @@ public class AgentFeatureService {
                 .orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));
 
         AgentFeature newAgentFeature = new AgentFeature();
-        newAgentFeature.setFeatureCode(feature);
-        newAgentFeature.setAgentCode(agentUser);
+        newAgentFeature.setFeature(feature);
+        newAgentFeature.setAgent(agentUser);
         newAgentFeature.setReading(agentFeature.reading());
         newAgentFeature.setWriting(agentFeature.writing());
 

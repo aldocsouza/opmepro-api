@@ -20,11 +20,11 @@ public class SessionHistoryRegularUser extends SessionHistory {
 
     @ManyToOne
     @JoinColumn(name = "cod_usuario", nullable = false)
-    private RegularUser userCode;
+    private RegularUser regularUser;
 
-    public SessionHistoryRegularUser(LocalDateTime login_date, LocalDateTime logout_date, String ipAddress, LocalDateTime updatedAt, Integer code, RegularUser userCode) {
+    public SessionHistoryRegularUser(LocalDateTime login_date, LocalDateTime logout_date, String ipAddress, LocalDateTime updatedAt, Integer code, RegularUser regularUser) {
         super(login_date, logout_date, ipAddress, updatedAt);
         this.code = code;
-        this.userCode = userCode;
+        this.regularUser = regularUser;
     }
 }

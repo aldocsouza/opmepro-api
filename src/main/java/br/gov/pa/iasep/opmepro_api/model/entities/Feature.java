@@ -1,7 +1,5 @@
 package br.gov.pa.iasep.opmepro_api.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,9 +25,9 @@ public class Feature {
     @Column(name = "descricao", nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "featureCode", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<AgentFeature> agentFeatures = new ArrayList<>();
+    @OneToMany(mappedBy = "feature", fetch = FetchType.LAZY)
+    private List<AgentFeature> agentFeatures = new ArrayList<>();
 
-    @OneToMany(mappedBy = "featureCode", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<RegularUserFeature> regularUserFeatures = new ArrayList<>();
+    @OneToMany(mappedBy = "feature", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RegularUserFeature> regularUserFeatures = new ArrayList<>();
 }
