@@ -27,8 +27,8 @@ public class AccreditedHistory extends BaseAccredited {
     @Column(name = "data_alteracao", nullable = false)
     private LocalDateTime updatedAt;
 
-    public AccreditedHistory(Integer code, Integer accreditedCode, String registry, String corporateName, String businessName, String cnpj, String contractNumber, String nickName, Boolean isSupplier, LocalDateTime updatedAt) {
-        super(registry, corporateName, businessName, cnpj, contractNumber, nickName, isSupplier);
+    public AccreditedHistory(Integer code, Integer accreditedCode, String registry, String corporateName, String businessName, String cnpj, String contractNumber, String nickName, Boolean supplier, LocalDateTime updatedAt) {
+        super(registry, corporateName, businessName, cnpj, contractNumber, nickName, supplier);
         this.code = code;
         this.accreditedCode = accreditedCode;
         this.updatedAt = updatedAt;

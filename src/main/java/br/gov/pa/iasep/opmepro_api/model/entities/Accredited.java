@@ -6,11 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "credenciados")
 @Getter
 @Setter
-@AllArgsConstructor
 public class Accredited extends BaseAccredited {
 
     @Id
@@ -18,12 +20,20 @@ public class Accredited extends BaseAccredited {
     @Column(name = "cod_credenciados", nullable = false)
     private Integer code;
 
-    public Accredited(String registry, String corporateName, String businessName, String cnpj, String contractNumber, String nickName, Boolean isSupplier, Integer code) {
-        super(registry, corporateName, businessName, cnpj, contractNumber, nickName, isSupplier);
+    @OneToMany(mappedBy = "accredited", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<RegularUser> regularUsers = new ArrayList<>();
+
+    public Accredited(Integer code, String registry, String corporateName, String businessName, String cnpj, String contractNumber, String nickName, Boolean supplier) {
+        super(registry, corporateName, businessName, cnpj, contractNumber, nickName, supplier);
         this.code = code;
+    }
+
+    public Accredited(String registry, String corporateName, String businessName, String cnpj, String contractNumber, String nickName, Boolean supplier) {
+        super(registry, corporateName, businessName, cnpj, contractNumber, nickName, supplier);
     }
 
     public Accredited() {
         super();
     }
+
 }

@@ -26,16 +26,16 @@ public class BaseAccredited {
     private String nickName;
 
     @Column(name = "fornecedor_material_opme", nullable = false)
-    private Boolean isSupplier;
+    private Boolean supplier;
 
-    public BaseAccredited(String registry, String corporateName, String businessName, String cnpj, String contractNumber, String nickName, Boolean isSupplier) {
+    public BaseAccredited(String registry, String corporateName, String businessName, String cnpj, String contractNumber, String nickName, Boolean supplier) {
         this.registry = registry;
         this.corporateName = corporateName;
         this.businessName = businessName;
         this.cnpj = cnpj;
         this.contractNumber = contractNumber;
         this.nickName = nickName;
-        this.isSupplier = isSupplier;
+        this.supplier = supplier;
     }
 
     public BaseAccredited() {
@@ -90,10 +90,23 @@ public class BaseAccredited {
     }
 
     public Boolean getSupplier() {
-        return isSupplier;
+        return supplier;
     }
 
     public void setSupplier(Boolean supplier) {
-        isSupplier = supplier;
+        this.supplier = supplier;
+    }
+
+    @Override
+    public String toString() {
+        return "BaseAccredited{" +
+                "registry='" + registry + '\'' +
+                ", corporateName='" + corporateName + '\'' +
+                ", businessName='" + businessName + '\'' +
+                ", cnpj='" + cnpj + '\'' +
+                ", contractNumber='" + contractNumber + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", supplier=" + supplier +
+                '}';
     }
 }
