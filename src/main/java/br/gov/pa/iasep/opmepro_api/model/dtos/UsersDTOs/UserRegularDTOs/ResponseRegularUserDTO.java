@@ -1,4 +1,4 @@
-package br.gov.pa.iasep.opmepro_api.model.dtos.UserRegularDTOs;
+package br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs;
 
 import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.RequestUserAccreditedDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.RegularUserFeature;

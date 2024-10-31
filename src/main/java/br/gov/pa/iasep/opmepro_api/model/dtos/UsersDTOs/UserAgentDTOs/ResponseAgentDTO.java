@@ -1,7 +1,7 @@
-package br.gov.pa.iasep.opmepro_api.model.dtos.UserAgentDTOs;
+package br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserAgentDTOs;
 
 import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.ResponseAgentFeatureDTO;
-import br.gov.pa.iasep.opmepro_api.model.entities.SessionHistoryAgent;
+import br.gov.pa.iasep.opmepro_api.model.dtos.SessionHistoryDTOs.ResponseSessionHistoryDTO;
 import br.gov.pa.iasep.opmepro_api.model.enums.UserRole;
 
 import java.time.LocalDateTime;
@@ -21,6 +21,6 @@ public record ResponseAgentDTO(
         UserRole role,
         LocalDateTime lastSession,
         List<ResponseAgentFeatureDTO> agentFeatures,
-        List<SessionHistoryAgent> sessionHistoryAgents
+        List<ResponseSessionHistoryDTO> sessionHistoryAgents
 ) {
 }

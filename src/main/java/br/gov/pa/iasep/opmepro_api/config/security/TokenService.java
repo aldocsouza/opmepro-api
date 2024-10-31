@@ -33,7 +33,6 @@ public class TokenService {
                     .withClaim("email", user.getEmail())
                     .withClaim("role", user.getRole().toString())
                     .withClaim("status", user.getStatus())
-                    .withClaim("lastSession", user.getLastSession().toString())
                     .withExpiresAt(generateExpirationDate());
 
                     if (user instanceof AgentUser) {
@@ -41,9 +40,17 @@ public class TokenService {
                         jwtBuilder.withClaim("code", agentUser.getCode());
                         jwtBuilder.withClaim("registry", agentUser.getRegistry());
                         jwtBuilder.withClaim("affiliation", agentUser.getAffiliation());
+
+                        if (user.getLastSession() != null) {
+                            jwtBuilder.withClaim("lastSession", user.getLastSession().toString());
+                        }
                     } else if (user instanceof RegularUser) {
                         RegularUser regularUser = (RegularUser) user;
                         jwtBuilder.withClaim("code", regularUser.getCode());
+
+                        if (user.getLastSession() != null) {
+                            jwtBuilder.withClaim("lastSession", user.getLastSession().toString());
+                        }
                     }
 
             return jwtBuilder.sign(algorithm);

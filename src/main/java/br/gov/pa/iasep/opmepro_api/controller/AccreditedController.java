@@ -23,7 +23,7 @@ public class AccreditedController {
 
     @GetMapping("/all-accredited")
     public ResponseEntity<List<ResponseAccreditedDTO>> getAllAccredites(){
-        List<ResponseAccreditedDTO> accreditedList = accreditedService.getAllAcrredited();
+        List<ResponseAccreditedDTO> accreditedList = accreditedService.getAllAccredited();
         return ResponseEntity.status(HttpStatus.OK).body(accreditedList);
     }
 

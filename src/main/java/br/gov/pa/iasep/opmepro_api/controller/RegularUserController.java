@@ -1,6 +1,6 @@
 package br.gov.pa.iasep.opmepro_api.controller;
 
-import br.gov.pa.iasep.opmepro_api.model.dtos.UserRegularDTOs.ResponseRegularUserDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponseRegularUserDTO;
 import br.gov.pa.iasep.opmepro_api.services.RegularUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

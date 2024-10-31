@@ -1,10 +1,9 @@
 package br.gov.pa.iasep.opmepro_api.model.interfaces.mappers;
 
-import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.RequestUserAccreditedDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UserAgentDTOs.RequestAgentDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UserAgentDTOs.ResponseAgentDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UserRegularDTOs.RequestRegularUserDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UserRegularDTOs.ResponseRegularUserDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserAgentDTOs.RequestAgentDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserAgentDTOs.ResponseAgentDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.RequestRegularUserDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponseRegularUserDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.AgentUser;
 import br.gov.pa.iasep.opmepro_api.model.entities.RegularUser;
 import org.mapstruct.Mapper;

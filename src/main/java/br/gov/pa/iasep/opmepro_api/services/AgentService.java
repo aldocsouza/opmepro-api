@@ -1,6 +1,6 @@
 package br.gov.pa.iasep.opmepro_api.services;
 
-import br.gov.pa.iasep.opmepro_api.model.dtos.UserAgentDTOs.ResponseAgentDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserAgentDTOs.ResponseAgentDTO;
 import br.gov.pa.iasep.opmepro_api.model.interfaces.mappers.UserMapper;
 import br.gov.pa.iasep.opmepro_api.repositories.AgentUserRepository;
 import org.springframework.stereotype.Service;

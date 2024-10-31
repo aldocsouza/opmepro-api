@@ -2,6 +2,7 @@ package br.gov.pa.iasep.opmepro_api.controller;
 
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.RequestFeatureDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.ResponseFeatureDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.Feature;
 import br.gov.pa.iasep.opmepro_api.services.FeatureService;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class FeatureController {
     }
 
     @GetMapping("/all-features")
-    public ResponseEntity<List<Feature>> getAllFeatures(){
+    public ResponseEntity<List<ResponseFeatureDTO>> getAllFeatures(){
         return ResponseEntity.status(HttpStatus.OK).body(featureService.getAllFeatures());
     }
 

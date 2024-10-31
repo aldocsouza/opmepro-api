@@ -2,6 +2,7 @@ package br.gov.pa.iasep.opmepro_api.services;
 
 import br.gov.pa.iasep.opmepro_api.exceptions.AlreadyExistsException;
 import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.RequestAccreditedDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.ResponseAccreditedAndUsersDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.ResponseAccreditedDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.entities.Accredited;
@@ -22,7 +23,11 @@ public class AccreditedService {
         this.accreditedMapper = accreditedMapper;
     }
 
-    public List<ResponseAccreditedDTO> getAllAcrredited(){
+    public List<ResponseAccreditedAndUsersDTO> getAllAccreditedAndUsers(){
+        return accreditedRepository.findAll().stream().map(accreditedMapper::toResponseUsersDTO).toList();
+    }
+
+    public List<ResponseAccreditedDTO> getAllAccredited(){
         return accreditedRepository.findAll().stream().map(accreditedMapper::toResponseDTO).toList();
     }
 
