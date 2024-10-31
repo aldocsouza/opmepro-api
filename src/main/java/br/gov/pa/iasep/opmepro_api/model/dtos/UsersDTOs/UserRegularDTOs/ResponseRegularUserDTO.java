@@ -1,8 +1,8 @@
 package br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs;
 
 import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.RequestUserAccreditedDTO;
-import br.gov.pa.iasep.opmepro_api.model.entities.RegularUserFeature;
-import br.gov.pa.iasep.opmepro_api.model.entities.SessionHistoryRegularUser;
+import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.ResponseRegularFeatureDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.SessionHistoryDTOs.ResponseSessionHistoryDTO;
 import br.gov.pa.iasep.opmepro_api.model.enums.UserRole;
 
 import java.time.LocalDateTime;
@@ -20,7 +20,7 @@ public record ResponseRegularUserDTO(
         UserRole role,
         LocalDateTime lastSession,
         RequestUserAccreditedDTO accredited,
-        List<SessionHistoryRegularUser> sessionHistoryRegularUsers,
-        List<RegularUserFeature> regularUserFeatures
+        List<ResponseSessionHistoryDTO> sessionHistoryRegularUsers,
+        List<ResponseRegularFeatureDTO> regularUserFeatures
 ) {
 }

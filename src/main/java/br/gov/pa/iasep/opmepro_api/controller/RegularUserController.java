@@ -20,7 +20,7 @@ public class RegularUserController {
         this.regularUserService = regularUserService;
     }
 
-    @GetMapping("users")
+    @GetMapping("/users")
     public ResponseEntity<List<ResponseRegularUserDTO>> getAllRegularUsers(){
         List<ResponseRegularUserDTO> response = regularUserService.getAllRegularUsers();
         return ResponseEntity.status(HttpStatus.OK).body(response);

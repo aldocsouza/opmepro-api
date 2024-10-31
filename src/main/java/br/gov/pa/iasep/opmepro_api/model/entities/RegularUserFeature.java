@@ -13,7 +13,7 @@ import lombok.Setter;
 public class RegularUserFeature extends UserFeature {
 
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "usuario_cod_usuario", nullable = false)
     private RegularUser regularUser;
 

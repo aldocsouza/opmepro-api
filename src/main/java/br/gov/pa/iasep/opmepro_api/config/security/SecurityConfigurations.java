@@ -37,6 +37,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/features/create-feature").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/agent-features/assign-feature").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/regular-features/assign-feature").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/accredited/create-accredited").permitAll()
                         .anyRequest().authenticated()
                 )

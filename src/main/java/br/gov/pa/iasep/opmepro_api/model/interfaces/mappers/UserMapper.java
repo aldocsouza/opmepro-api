@@ -24,7 +24,7 @@ public interface UserMapper {
 
     AgentUser toEntityAgent(RequestAgentDTO agentUserDto);
 
-    RegularUser toEntityRegular(RequestAgentDTO regularUserDto);
+    RegularUser toEntityRegular(RequestRegularUserDTO regularUserDto);
 
     RegularUser toEntityRegularAccredited(RequestRegularUserDTO regularUserDto);
 
