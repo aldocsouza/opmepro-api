@@ -1,8 +1,8 @@
 package br.gov.pa.iasep.opmepro_api.services;
 
-import br.gov.pa.iasep.opmepro_api.base.BaseAccredited;
 import br.gov.pa.iasep.opmepro_api.exceptions.AlreadyExistsException;
 import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.RequestAccreditedDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.ResponseAccreditedDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.entities.Accredited;
 import br.gov.pa.iasep.opmepro_api.model.interfaces.mappers.AccreditedMapper;
@@ -22,15 +22,20 @@ public class AccreditedService {
         this.accreditedMapper = accreditedMapper;
     }
 
-    public List<Accredited> getAllAcrredited(){
-        return accreditedRepository.findAll();
+    public List<ResponseAccreditedDTO> getAllAcrredited(){
+        return accreditedRepository.findAll().stream().map(accreditedMapper::toResponseDTO).toList();
     }
 
     public ApiResponse createAccredited(RequestAccreditedDTO accreditedDTO){
 
-        if(accreditedRepository.findByRegistry(accreditedDTO.registry()) != null) throw new AlreadyExistsException("Já existe um credenciado com a matrícula Nº " + accreditedDTO.registry() + " informada.");
-        if(accreditedRepository.findByContractNumber(accreditedDTO.contractNumber()) != null) throw new AlreadyExistsException("Já existe um credenciado com o Nº de Contrato " + accreditedDTO.contractNumber() + " informado.");
-        if(accreditedRepository.findByCnpj(accreditedDTO.cnpj()) != null)  throw new AlreadyExistsException("Já existe um credenciado com o CNPJ Nº " + accreditedDTO.cnpj() + " informado.");
+        if(accreditedRepository.findByRegistry(accreditedDTO.registry()) != null)
+            throw new AlreadyExistsException("Já existe um credenciado com a matrícula Nº " + accreditedDTO.registry() + " informada.");
+
+        if(accreditedRepository.findByContractNumber(accreditedDTO.contractNumber()) != null)
+            new AlreadyExistsException("Já existe um credenciado com o Nº de Contrato " + accreditedDTO.contractNumber() + " informado.");
+
+        if(accreditedRepository.findByCnpj(accreditedDTO.cnpj()) != null)
+            throw new AlreadyExistsException("Já existe um credenciado com o CNPJ Nº " + accreditedDTO.cnpj() + " informado.");
 
         Accredited accredited = accreditedMapper.toEntity(accreditedDTO);
 

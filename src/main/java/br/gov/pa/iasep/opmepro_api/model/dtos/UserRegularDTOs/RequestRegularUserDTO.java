@@ -1,5 +1,6 @@
 package br.gov.pa.iasep.opmepro_api.model.dtos.UserRegularDTOs;
 
+import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.RequestUserAccreditedDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.*;
 import br.gov.pa.iasep.opmepro_api.model.enums.UserRole;
 import jakarta.validation.constraints.NotBlank;
@@ -34,13 +35,7 @@ public record RequestRegularUserDTO(
         @NotNull
         UserRole role,
 
-        LocalDateTime lastSession,
-
         @NotNull
-        Accredited accredited,
-
-        List<SessionHistoryRegularUser> sessionHistoryRegularUsers,
-
-        List<RegularUserFeature> regularUserFeatures
+        RequestUserAccreditedDTO accredited
 ) {
 }

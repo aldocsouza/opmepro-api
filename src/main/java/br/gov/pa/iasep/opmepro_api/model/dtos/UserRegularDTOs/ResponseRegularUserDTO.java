@@ -1,6 +1,6 @@
 package br.gov.pa.iasep.opmepro_api.model.dtos.UserRegularDTOs;
 
-import br.gov.pa.iasep.opmepro_api.model.entities.Accredited;
+import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.RequestUserAccreditedDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.RegularUserFeature;
 import br.gov.pa.iasep.opmepro_api.model.entities.SessionHistoryRegularUser;
 import br.gov.pa.iasep.opmepro_api.model.enums.UserRole;
@@ -19,7 +19,7 @@ public record ResponseRegularUserDTO(
         Boolean status,
         UserRole role,
         LocalDateTime lastSession,
-        Accredited accredited,
+        RequestUserAccreditedDTO accredited,
         List<SessionHistoryRegularUser> sessionHistoryRegularUsers,
         List<RegularUserFeature> regularUserFeatures
 ) {

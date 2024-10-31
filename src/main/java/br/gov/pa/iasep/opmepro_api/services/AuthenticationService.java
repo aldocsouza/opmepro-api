@@ -3,7 +3,7 @@ package br.gov.pa.iasep.opmepro_api.services;
 import br.gov.pa.iasep.opmepro_api.base.User;
 import br.gov.pa.iasep.opmepro_api.config.security.TokenService;
 import br.gov.pa.iasep.opmepro_api.exceptions.UnauthorizedException;
-import br.gov.pa.iasep.opmepro_api.exceptions.UserAlreadyExistsException;
+import br.gov.pa.iasep.opmepro_api.exceptions.AlreadyExistsException;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.dtos.LoginDTOs.LoginRequestDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.LoginDTOs.LoginResponseDTO;
@@ -11,7 +11,7 @@ import br.gov.pa.iasep.opmepro_api.model.dtos.UserAgentDTOs.RequestAgentDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UserRegularDTOs.RequestRegularUserDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.AgentUser;
 import br.gov.pa.iasep.opmepro_api.model.entities.RegularUser;
-import br.gov.pa.iasep.opmepro_api.model.interfaces.mappers.AgentMapper;
+import br.gov.pa.iasep.opmepro_api.model.interfaces.mappers.UserMapper;
 import br.gov.pa.iasep.opmepro_api.repositories.AgentUserRepository;
 import br.gov.pa.iasep.opmepro_api.repositories.RegularUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,22 +29,26 @@ public class AuthenticationService {
 
     private final RegularUserRepository regularUserRepository;
 
-    private final AgentMapper agentMapper;
+    private final UserMapper userMapper;
 
     private final TokenService tokenService;
 
-    public AuthenticationService (AgentUserRepository agentUserRepository, RegularUserRepository regularUserRepository, AgentMapper agentMapper, TokenService tokenService){
+    public AuthenticationService (AgentUserRepository agentUserRepository, RegularUserRepository regularUserRepository, UserMapper userMapper, TokenService tokenService){
         this.agentUserRepository = agentUserRepository;
         this.regularUserRepository = regularUserRepository;
-        this.agentMapper = agentMapper;
+        this.userMapper = userMapper;
         this.tokenService = tokenService;
     }
 
     public ApiResponse createAgentAccount(RequestAgentDTO userDto){
-        if(agentUserRepository.findByUsername(userDto.username()) != null) throw new UserAlreadyExistsException("Já existe um usuário com o login informado");
-        if(agentUserRepository.findByCpf(userDto.cpf()) != null) throw new UserAlreadyExistsException("Já existe um usuário com o CPF informado");
-        if(agentUserRepository.findByEmail(userDto.email()) != null)  throw new UserAlreadyExistsException("Já existe um usuário com o e-mail informado");
-        if(agentUserRepository.findByRegistry(userDto.registry()) != null) throw new UserAlreadyExistsException("Já existe um usuário com a matrícula informada");
+        if(agentUserRepository.findByUsername(userDto.username()) != null) throw new AlreadyExistsException("Já existe um usuário com o login informado");
+        if(agentUserRepository.findByCpf(userDto.cpf()) != null) throw new AlreadyExistsException("Já existe um usuário com o CPF informado");
+        if(agentUserRepository.findByEmail(userDto.email()) != null)  throw new AlreadyExistsException("Já existe um usuário com o e-mail informado");
+        if(agentUserRepository.findByRegistry(userDto.registry()) != null) throw new AlreadyExistsException("Já existe um usuário com a matrícula informada");
+
+        if(regularUserRepository.findByUsername(userDto.username()) != null) throw new AlreadyExistsException("Já existe um usuário com o login informado");
+        if(regularUserRepository.findByCpf(userDto.cpf()) != null) throw new AlreadyExistsException("Já existe um usuário com o CPF informado");
+        if(regularUserRepository.findByEmail(userDto.email()) != null)  throw new AlreadyExistsException("Já existe um usuário com o e-mail informado");
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(userDto.password());
 
@@ -57,7 +61,6 @@ public class AuthenticationService {
                 userDto.email(),
                 userDto.status(),
                 userDto.role(),
-                userDto.lastSession(),
                 userDto.registry(),
                 userDto.affiliation()
         );
@@ -68,9 +71,13 @@ public class AuthenticationService {
     }
 
     public ApiResponse createRegularUserAccount(RequestRegularUserDTO userDto){
-        if(agentUserRepository.findByUsername(userDto.username()) != null) throw new UserAlreadyExistsException("Já existe um usuário com o login informado");
-        if(agentUserRepository.findByCpf(userDto.cpf()) != null) throw new UserAlreadyExistsException("Já existe um usuário com o CPF informado");
-        if(agentUserRepository.findByEmail(userDto.email()) != null)  throw new UserAlreadyExistsException("Já existe um usuário com o e-mail informado");
+        if(agentUserRepository.findByUsername(userDto.username()) != null) throw new AlreadyExistsException("Já existe um usuário com o login informado");
+        if(agentUserRepository.findByCpf(userDto.cpf()) != null) throw new AlreadyExistsException("Já existe um usuário com o CPF informado");
+        if(agentUserRepository.findByEmail(userDto.email()) != null)  throw new AlreadyExistsException("Já existe um usuário com o e-mail informado");
+
+        if(regularUserRepository.findByUsername(userDto.username()) != null) throw new AlreadyExistsException("Já existe um usuário com o login informado");
+        if(regularUserRepository.findByCpf(userDto.cpf()) != null) throw new AlreadyExistsException("Já existe um usuário com o CPF informado");
+        if(regularUserRepository.findByEmail(userDto.email()) != null)  throw new AlreadyExistsException("Já existe um usuário com o e-mail informado");
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(userDto.password());
 
@@ -83,8 +90,7 @@ public class AuthenticationService {
                 userDto.email(),
                 userDto.status(),
                 userDto.role(),
-                userDto.lastSession(),
-                userDto.accredited()
+                userMapper.toEntityRegularAccredited(userDto).getAccredited()
         );
 
         regularUserRepository.save(regularUser);

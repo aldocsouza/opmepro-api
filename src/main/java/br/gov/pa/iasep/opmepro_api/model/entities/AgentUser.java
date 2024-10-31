@@ -36,10 +36,10 @@ public class AgentUser extends User {
 
     public AgentUser(
             String name, String cpf, String username, String password, String phone,
-            String email, Boolean status, UserRole role, LocalDateTime lastSession,
+            String email, Boolean status, UserRole role,
             String registry, String affiliation
     ) {
-        super(name, cpf, username, password, phone, email, status, role, lastSession);
+        super(name, cpf, username, password, phone, email, status, role);
         this.registry = registry;
         this.affiliation = affiliation;
     }

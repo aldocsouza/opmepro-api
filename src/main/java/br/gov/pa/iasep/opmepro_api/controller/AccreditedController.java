@@ -1,6 +1,7 @@
 package br.gov.pa.iasep.opmepro_api.controller;
 
 import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.RequestAccreditedDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.ResponseAccreditedDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.entities.Accredited;
 import br.gov.pa.iasep.opmepro_api.services.AccreditedService;
@@ -21,8 +22,8 @@ public class AccreditedController {
     }
 
     @GetMapping("/all-accredited")
-    public ResponseEntity<List<Accredited>> getAllAccredites(){
-        List<Accredited> accreditedList = accreditedService.getAllAcrredited();
+    public ResponseEntity<List<ResponseAccreditedDTO>> getAllAccredites(){
+        List<ResponseAccreditedDTO> accreditedList = accreditedService.getAllAcrredited();
         return ResponseEntity.status(HttpStatus.OK).body(accreditedList);
     }
 

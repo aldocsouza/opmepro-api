@@ -59,6 +59,17 @@ public abstract class User implements UserDetails {
         this.lastSession = lastSession;
     }
 
+    public User(String name, String cpf, String username, String password, String phone, String email, Boolean status, UserRole role) {
+        this.name = name;
+        this.cpf = cpf;
+        this.username = username;
+        this.password = password;
+        this.phone = phone;
+        this.email = email;
+        this.status = status;
+        this.role = role;
+    }
+
     public User() {
     }
 

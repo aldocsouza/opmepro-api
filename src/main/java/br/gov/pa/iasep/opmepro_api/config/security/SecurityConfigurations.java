@@ -28,10 +28,12 @@ public class SecurityConfigurations {
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.GET, "/api/features/all-features").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/agents/all-agents").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/regular/users").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/agents/users").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/accredited/all-accredited").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/register-user-agent").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/auth/register-user-regular").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/features/create-feature").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/agent-features/assign-feature").permitAll()

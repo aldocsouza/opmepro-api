@@ -20,7 +20,7 @@ public class AgentController {
         this.agentService = agentService;
     }
 
-    @GetMapping("/all-agents")
+    @GetMapping("/users")
     public ResponseEntity<List<ResponseAgentDTO>> getAllAgents(){
         return ResponseEntity.status(HttpStatus.OK).body(agentService.getAllAgents());
     }

@@ -22,7 +22,7 @@ public class RegularUser extends User {
     private Integer code;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "credenciados_cod_credenciados", nullable = false)
+    @JoinColumn(name = "credenciados_cod_credenciados", nullable = false)
     private Accredited accredited;
 
     @OneToMany(mappedBy = "regularUser", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -37,8 +37,8 @@ public class RegularUser extends User {
         this.accredited = accredited;
     }
 
-    public RegularUser(String name, String cpf, String username, String password, String phone, String email, Boolean status, UserRole role, LocalDateTime lastSession, Accredited accredited) {
-        super(name, cpf, username, password, phone, email, status, role, lastSession);
+    public RegularUser(String name, String cpf, String username, String password, String phone, String email, Boolean status, UserRole role, Accredited accredited) {
+        super(name, cpf, username, password, phone, email, status, role);
         this.accredited = accredited;
     }
 

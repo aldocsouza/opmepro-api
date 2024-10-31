@@ -39,12 +39,6 @@ public record RequestAgentDTO(
         Boolean status,
 
         @NotNull
-        UserRole role,
-
-        LocalDateTime lastSession,
-
-        List<SessionHistoryAgent> sessionHistoryAgents,
-
-        List<AgentFeature> agentFeatures
+        UserRole role
 ) {
 }
