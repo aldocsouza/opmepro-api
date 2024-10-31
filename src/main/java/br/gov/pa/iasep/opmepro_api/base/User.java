@@ -1,5 +1,9 @@
 package br.gov.pa.iasep.opmepro_api.base;
 
+import br.gov.pa.iasep.opmepro_api.model.entities.AgentFeature;
+import br.gov.pa.iasep.opmepro_api.model.entities.RegularUser;
+import br.gov.pa.iasep.opmepro_api.model.entities.SessionHistoryAgent;
+import br.gov.pa.iasep.opmepro_api.model.entities.SessionHistoryRegularUser;
 import br.gov.pa.iasep.opmepro_api.model.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
@@ -8,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -41,6 +46,12 @@ public abstract class User implements UserDetails {
 
     @Column(name = "ultima_sessao")
     private LocalDateTime lastSession;
+
+    @OneToMany(mappedBy = "cod_usuario", cascade = CascadeType.ALL)
+    private List<SessionHistoryRegularUser> sessionHistoryRegularUserList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cod_usuario")
+    private List<RegularUser> regularUsers = new ArrayList<>();
 
     public User(String name, String cpf, String username, String password, String phone, String email, Boolean status, UserRole role, LocalDateTime lastSession) {
         this.name = name;

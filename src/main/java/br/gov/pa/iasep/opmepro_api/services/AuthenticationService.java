@@ -8,6 +8,7 @@ import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.dtos.LoginDTOs.LoginRequestDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.LoginDTOs.LoginResponseDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UserAgentDTOs.RequestAgentDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UserRegularDTOs.RequestRegularUserDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.AgentUser;
 import br.gov.pa.iasep.opmepro_api.model.entities.RegularUser;
 import br.gov.pa.iasep.opmepro_api.model.interfaces.mappers.AgentMapper;
@@ -62,6 +63,31 @@ public class AuthenticationService {
         );
 
         agentUserRepository.save(agent);
+
+        return new ApiResponse("Usuário cadastrado com sucesso!", true);
+    }
+
+    public ApiResponse createRegularUserAccount(RequestRegularUserDTO userDto){
+        if(agentUserRepository.findByUsername(userDto.username()) != null) throw new UserAlreadyExistsException("Já existe um usuário com o login informado");
+        if(agentUserRepository.findByCpf(userDto.cpf()) != null) throw new UserAlreadyExistsException("Já existe um usuário com o CPF informado");
+        if(agentUserRepository.findByEmail(userDto.email()) != null)  throw new UserAlreadyExistsException("Já existe um usuário com o e-mail informado");
+
+        String encryptedPassword = new BCryptPasswordEncoder().encode(userDto.password());
+
+        RegularUser regularUser = new RegularUser(
+                userDto.name(),
+                userDto.cpf(),
+                userDto.username(),
+                encryptedPassword,
+                userDto.phone(),
+                userDto.email(),
+                userDto.status(),
+                userDto.role(),
+                userDto.lastSession(),
+                userDto.accredited()
+        );
+
+        regularUserRepository.save(regularUser);
 
         return new ApiResponse("Usuário cadastrado com sucesso!", true);
     }

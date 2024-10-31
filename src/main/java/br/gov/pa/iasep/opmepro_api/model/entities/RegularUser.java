@@ -21,19 +21,25 @@ public class RegularUser extends User {
     @Column(name = "cod_usuario", nullable = false, length = 11)
     private Integer code;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "credenciados_cod_credenciados", nullable = false)
+    private Accredited accredited;
+
     @OneToMany(mappedBy = "regularUser", cascade = CascadeType.ALL, orphanRemoval = true)
     List<RegularUserFeature> regularUserFeatures = new ArrayList<>();
 
     @OneToMany(mappedBy = "regularUser", cascade = CascadeType.ALL)
     List<SessionHistoryRegularUser> sessionHistoryRegularUsers = new ArrayList<>();
 
-    public RegularUser(Integer code, String name, String cpf, String username, String password, String phone, String email, Boolean status, UserRole role, LocalDateTime lastSession) {
+    public RegularUser(Integer code, String name, String cpf, String username, String password, String phone, String email, Boolean status, UserRole role, LocalDateTime lastSession, Accredited accredited) {
         super(name, cpf, username, password, phone, email, status, role, lastSession);
         this.code = code;
+        this.accredited = accredited;
     }
 
-    public RegularUser(String name, String cpf, String username, String password, String phone, String email, Boolean status, UserRole role, LocalDateTime lastSession) {
+    public RegularUser(String name, String cpf, String username, String password, String phone, String email, Boolean status, UserRole role, LocalDateTime lastSession, Accredited accredited) {
         super(name, cpf, username, password, phone, email, status, role, lastSession);
+        this.accredited = accredited;
     }
 
     public RegularUser() {
