@@ -17,7 +17,7 @@ public abstract class SessionHistory {
     @Column(name = "data_login", nullable = false)
     private LocalDateTime loginDate;
 
-    @Column(name = "data_logout", nullable = false)
+    @Column(name = "data_logout")
     private LocalDateTime logoutDate;
 
     @Column(name = "endereco_ip", nullable = false, length = 15)
@@ -26,7 +26,7 @@ public abstract class SessionHistory {
     @Column(name = "data_alteracao", nullable = false, length = 15)
     private LocalDateTime updatedAt;
 
-    public SessionHistory(LocalDateTime loginDate, LocalDateTime logout_date, String ipAddress, LocalDateTime updatedAt) {
+    public SessionHistory(LocalDateTime loginDate, LocalDateTime logoutDate, String ipAddress, LocalDateTime updatedAt) {
         this.loginDate = loginDate;
         this.logoutDate = logoutDate;
         this.ipAddress = ipAddress;

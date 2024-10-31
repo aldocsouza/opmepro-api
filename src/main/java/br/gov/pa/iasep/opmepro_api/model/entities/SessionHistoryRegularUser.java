@@ -22,9 +22,17 @@ public class SessionHistoryRegularUser extends SessionHistory {
     @JoinColumn(name = "cod_usuario", nullable = false)
     private RegularUser regularUser;
 
-    public SessionHistoryRegularUser(LocalDateTime login_date, LocalDateTime logout_date, String ipAddress, LocalDateTime updatedAt, Integer code, RegularUser regularUser) {
-        super(login_date, logout_date, ipAddress, updatedAt);
+    public SessionHistoryRegularUser(LocalDateTime loginDate, LocalDateTime logoutDate, String ipAddress, LocalDateTime updatedAt, Integer code, RegularUser regularUser) {
+        super(loginDate, logoutDate, ipAddress, updatedAt);
         this.code = code;
         this.regularUser = regularUser;
+    }
+
+    public SessionHistoryRegularUser(LocalDateTime loginDate, LocalDateTime logoutDate, String ipAddress, LocalDateTime updatedAt, RegularUser regularUser) {
+        super(loginDate, logoutDate, ipAddress, updatedAt);
+        this.regularUser = regularUser;
+    }
+
+    public SessionHistoryRegularUser() {
     }
 }

@@ -33,11 +33,14 @@ public class AuthenticationService {
 
     private final TokenService tokenService;
 
-    public AuthenticationService (AgentUserRepository agentUserRepository, RegularUserRepository regularUserRepository, UserMapper userMapper, TokenService tokenService){
+    private final SessionHistoryService sessionHistoryService;
+
+    public AuthenticationService (AgentUserRepository agentUserRepository, RegularUserRepository regularUserRepository, UserMapper userMapper, TokenService tokenService, SessionHistoryService sessionHistoryService){
         this.agentUserRepository = agentUserRepository;
         this.regularUserRepository = regularUserRepository;
         this.userMapper = userMapper;
         this.tokenService = tokenService;
+        this.sessionHistoryService = sessionHistoryService;
     }
 
     public ApiResponse createAgentAccount(RequestAgentDTO userDto){
@@ -108,6 +111,14 @@ public class AuthenticationService {
 
         if (user != null && new BCryptPasswordEncoder().matches(loginRequestDTO.password(), user.getPassword())) {
             var token = tokenService.generateToken(user);
+
+            if (user instanceof AgentUser agentUser){
+                this.sessionHistoryService.startSessionHistoryAgent(agentUser);
+            } else {
+                RegularUser regularUser = (RegularUser) user;
+                this.sessionHistoryService.startSessionHistoryRegular(regularUser);
+            }
+
             return new LoginResponseDTO(token);
         } else {
             throw new UnauthorizedException("Usuário ou senha inválido!");

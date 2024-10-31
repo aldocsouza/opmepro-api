@@ -21,10 +21,14 @@ public class SessionHistoryAgent extends SessionHistory {
     @JoinColumn(name = "cod_agente", nullable = false)
     private AgentUser agent;
 
-    public SessionHistoryAgent(Integer code, AgentUser agent, LocalDateTime login_date, LocalDateTime logout_date, String ipAddress, LocalDateTime updatedAt) {
-        super(login_date, logout_date, ipAddress, updatedAt);
+    public SessionHistoryAgent(LocalDateTime loginDate, LocalDateTime logoutDate, String ipAddress, LocalDateTime updatedAt, Integer code, AgentUser agent) {
+        super(loginDate, logoutDate, ipAddress, updatedAt);
         this.code = code;
         this.agent = agent;
     }
 
+    public SessionHistoryAgent(LocalDateTime loginDate, LocalDateTime logoutDate, String ipAddress, LocalDateTime updatedAt, AgentUser agent) {
+        super(loginDate, logoutDate, ipAddress, updatedAt);
+        this.agent = agent;
+    }
 }
