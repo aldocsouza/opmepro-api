@@ -26,7 +26,6 @@ public class AgentFeatureService {
 
     public void assignFeature(RequestAgentFeatureDTO agentFeature){
 
-        System.out.println(agentFeature.agentCode());
         Feature feature = featureRepository.findById(agentFeature.featureCode())
                 .orElseThrow(() -> new FeatureNotFoundException("Funcionalidade não encontrada!"));
 
