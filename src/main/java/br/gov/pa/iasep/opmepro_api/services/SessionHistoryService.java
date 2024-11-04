@@ -6,7 +6,6 @@ import br.gov.pa.iasep.opmepro_api.model.entities.SessionHistoryAgent;
 import br.gov.pa.iasep.opmepro_api.model.entities.SessionHistoryRegularUser;
 import br.gov.pa.iasep.opmepro_api.repositories.SessionHistoryAgentRepository;
 import br.gov.pa.iasep.opmepro_api.repositories.SessionHistoryRegularRepository;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
