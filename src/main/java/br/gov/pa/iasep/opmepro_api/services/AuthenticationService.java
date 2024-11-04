@@ -14,6 +14,7 @@ import br.gov.pa.iasep.opmepro_api.model.entities.RegularUser;
 import br.gov.pa.iasep.opmepro_api.model.interfaces.mappers.UserMapper;
 import br.gov.pa.iasep.opmepro_api.repositories.AgentUserRepository;
 import br.gov.pa.iasep.opmepro_api.repositories.RegularUserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -102,7 +103,7 @@ public class AuthenticationService {
     }
 
 
-    public LoginResponseDTO login(LoginRequestDTO loginRequestDTO){
+    public LoginResponseDTO login(LoginRequestDTO loginRequestDTO, HttpServletRequest request){
         User user = (AgentUser) agentUserRepository.findByUsername(loginRequestDTO.username());
 
         if(user == null){
@@ -113,10 +114,10 @@ public class AuthenticationService {
             var token = tokenService.generateToken(user);
 
             if (user instanceof AgentUser agentUser){
-                this.sessionHistoryService.startSessionHistoryAgent(agentUser);
+                this.sessionHistoryService.startSessionHistoryAgent(agentUser, request.getRemoteAddr());
             } else {
                 RegularUser regularUser = (RegularUser) user;
-                this.sessionHistoryService.startSessionHistoryRegular(regularUser);
+                this.sessionHistoryService.startSessionHistoryRegular(regularUser, request.getRemoteAddr());
             }
 
             return new LoginResponseDTO(token);

@@ -22,22 +22,22 @@ public class SessionHistoryService {
         this.sessionHistoryRegularRepository = sessionHistoryRegularRepository;
     }
 
-    public void startSessionHistoryAgent(AgentUser agentUser){
+    public void startSessionHistoryAgent(AgentUser agentUser, String ipClient){
         SessionHistoryAgent sessionHistoryAgent = new SessionHistoryAgent(
                 LocalDateTime.now(),
                 null,
-                "192168011",
+                ipClient,
                 null,
                 agentUser
         );
         sessionHistoryAgentRepository.save(sessionHistoryAgent);
     }
 
-    public void startSessionHistoryRegular(RegularUser regularUser){
+    public void startSessionHistoryRegular(RegularUser regularUser, String ipClient){
         SessionHistoryRegularUser historyRegularUser = new SessionHistoryRegularUser(
                 LocalDateTime.now(),
                 null,
-                "192168011",
+                ipClient,
                 null,
                 regularUser
         );
