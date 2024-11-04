@@ -31,4 +31,7 @@ public class SessionHistoryAgent extends SessionHistory {
         super(loginDate, logoutDate, ipAddress, updatedAt);
         this.agent = agent;
     }
+
+    public SessionHistoryAgent() {
+    }
 }
