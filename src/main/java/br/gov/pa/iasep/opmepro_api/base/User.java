@@ -149,7 +149,7 @@ public abstract class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role.equals(UserRole.REGULAR_ADMIN) || this.role.equals(UserRole.AGENT_ADMIN))
+        if(this.role.equals(UserRole.ADMIN))
             return List.of(
                     new SimpleGrantedAuthority("ROLE_ADMIN"),
                     new SimpleGrantedAuthority("ROLE_USER")
