@@ -1,6 +1,6 @@
 package br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserAgentDTOs;
 
-import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.ResponseAgentFeatureDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.FeatureAndUsersDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.SessionHistoryDTOs.ResponseSessionHistoryDTO;
 import br.gov.pa.iasep.opmepro_api.model.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -15,13 +15,12 @@ public record ResponseAgentDTO(
         String registry,
         String affiliation,
         String username,
-        String password,
         String phone,
         String email,
         Boolean status,
         UserRole role,
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss") LocalDateTime lastSession,
-        List<ResponseAgentFeatureDTO> agentFeatures,
+        List<FeatureAndUsersDTO> agentFeatures,
         List<ResponseSessionHistoryDTO> sessionHistoryAgents
 ) {
 }

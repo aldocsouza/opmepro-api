@@ -1,8 +1,8 @@
 package br.gov.pa.iasep.opmepro_api.model.interfaces.mappers;
 
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserAgentDTOs.RequestAgentDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserAgentDTOs.AgentUserCreateDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserAgentDTOs.ResponseAgentDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.RequestRegularUserDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.RegularUserCreateDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponseRegularUserDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.AgentUser;
 import br.gov.pa.iasep.opmepro_api.model.entities.RegularUser;
@@ -14,18 +14,18 @@ public interface UserMapper {
 
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    RequestAgentDTO toRequestAgentDTO(AgentUser agentUser);
+    AgentUserCreateDTO toRequestAgentDTO(AgentUser agentUser);
 
-    RequestRegularUserDTO toRequestRegularDTO(RegularUser regularUser);
+    RegularUserCreateDTO toRequestRegularDTO(RegularUser regularUser);
 
     ResponseAgentDTO toResponseAgentDTO(AgentUser agentUser);
 
     ResponseRegularUserDTO toResponseRegularDTO(RegularUser regularUser);
 
-    AgentUser toEntityAgent(RequestAgentDTO agentUserDto);
+    AgentUser toEntityAgent(AgentUserCreateDTO agentUserDto);
 
-    RegularUser toEntityRegular(RequestRegularUserDTO regularUserDto);
+    RegularUser toEntityRegular(RegularUserCreateDTO regularUserDto);
 
-    RegularUser toEntityRegularAccredited(RequestRegularUserDTO regularUserDto);
+    RegularUser toEntityRegularAccredited(RegularUserCreateDTO regularUserDto);
 
 }

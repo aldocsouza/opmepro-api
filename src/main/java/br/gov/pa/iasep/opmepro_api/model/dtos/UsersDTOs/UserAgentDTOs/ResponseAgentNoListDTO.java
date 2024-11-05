@@ -12,7 +12,6 @@ public record ResponseAgentNoListDTO(
         String registry,
         String affiliation,
         String username,
-        String password,
         String phone,
         String email,
         Boolean status,

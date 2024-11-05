@@ -3,7 +3,9 @@ package br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record RequestAccreditedDTO (
+public record UserAccreditedCreateDTO(
+        @NotNull @NotBlank
+        Integer code,
 
         @NotNull @NotBlank
         String registry,

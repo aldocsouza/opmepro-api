@@ -1,8 +1,8 @@
 package br.gov.pa.iasep.opmepro_api.services;
 
 import br.gov.pa.iasep.opmepro_api.exceptions.AlreadyExistsException;
-import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.RequestAccreditedDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.ResponseAccreditedAndUsersDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.AccreditedAndUsersDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.AccreditedCreateDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.ResponseAccreditedDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.entities.Accredited;
@@ -23,7 +23,7 @@ public class AccreditedService {
         this.accreditedMapper = accreditedMapper;
     }
 
-    public List<ResponseAccreditedAndUsersDTO> getAllAccreditedAndUsers(){
+    public List<AccreditedAndUsersDTO> getAllAccreditedAndUsers(){
         return accreditedRepository.findAll().stream().map(accreditedMapper::toResponseUsersDTO).toList();
     }
 
@@ -31,7 +31,7 @@ public class AccreditedService {
         return accreditedRepository.findAll().stream().map(accreditedMapper::toResponseDTO).toList();
     }
 
-    public ApiResponse createAccredited(RequestAccreditedDTO accreditedDTO){
+    public ApiResponse createAccredited(AccreditedCreateDTO accreditedDTO){
 
         if(accreditedRepository.findByRegistry(accreditedDTO.registry()) != null)
             throw new AlreadyExistsException("Já existe um credenciado com a matrícula Nº " + accreditedDTO.registry() + " informada.");

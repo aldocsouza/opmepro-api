@@ -1,9 +1,8 @@
 package br.gov.pa.iasep.opmepro_api.controller;
 
-import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.RequestAccreditedDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.AccreditedCreateDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.ResponseAccreditedDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
-import br.gov.pa.iasep.opmepro_api.model.entities.Accredited;
 import br.gov.pa.iasep.opmepro_api.services.AccreditedService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +27,7 @@ public class AccreditedController {
     }
 
     @PostMapping("/create-accredited")
-    public ResponseEntity<ApiResponse> createAccredited(@RequestBody RequestAccreditedDTO accredited){
+    public ResponseEntity<ApiResponse> createAccredited(@RequestBody AccreditedCreateDTO accredited){
         ApiResponse response = accreditedService.createAccredited(accredited);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

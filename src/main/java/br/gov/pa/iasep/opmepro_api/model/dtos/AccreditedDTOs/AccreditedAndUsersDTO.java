@@ -1,6 +1,10 @@
 package br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs;
 
-public record RequestUserAccreditedDTO (
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponseRegularUserNoListDTO;
+
+import java.util.List;
+
+public record AccreditedAndUsersDTO(
         Integer code,
         String registry,
         String corporateName,
@@ -8,6 +12,7 @@ public record RequestUserAccreditedDTO (
         String cnpj,
         String contractNumber,
         String nickName,
-        Boolean supplier
+        Boolean supplier,
+        List<ResponseRegularUserNoListDTO> regularUsers
 ) {
 }

@@ -7,8 +7,8 @@ import br.gov.pa.iasep.opmepro_api.exceptions.AlreadyExistsException;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.dtos.LoginDTOs.LoginRequestDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.LoginDTOs.LoginResponseDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserAgentDTOs.RequestAgentDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.RequestRegularUserDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserAgentDTOs.AgentUserCreateDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.RegularUserCreateDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.AgentUser;
 import br.gov.pa.iasep.opmepro_api.model.entities.RegularUser;
 import br.gov.pa.iasep.opmepro_api.model.interfaces.mappers.UserMapper;
@@ -44,7 +44,7 @@ public class AuthenticationService {
         this.sessionHistoryService = sessionHistoryService;
     }
 
-    public ApiResponse createAgentAccount(RequestAgentDTO userDto){
+    public ApiResponse createAgentAccount(AgentUserCreateDTO userDto){
         if(agentUserRepository.findByUsername(userDto.username()) != null) throw new AlreadyExistsException("Já existe um usuário com o login informado");
         if(agentUserRepository.findByCpf(userDto.cpf()) != null) throw new AlreadyExistsException("Já existe um usuário com o CPF informado");
         if(agentUserRepository.findByEmail(userDto.email()) != null)  throw new AlreadyExistsException("Já existe um usuário com o e-mail informado");
@@ -74,7 +74,7 @@ public class AuthenticationService {
         return new ApiResponse("Usuário cadastrado com sucesso!", true);
     }
 
-    public ApiResponse createRegularUserAccount(RequestRegularUserDTO userDto){
+    public ApiResponse createRegularUserAccount(RegularUserCreateDTO userDto){
         if(agentUserRepository.findByUsername(userDto.username()) != null) throw new AlreadyExistsException("Já existe um usuário com o login informado");
         if(agentUserRepository.findByCpf(userDto.cpf()) != null) throw new AlreadyExistsException("Já existe um usuário com o CPF informado");
         if(agentUserRepository.findByEmail(userDto.email()) != null)  throw new AlreadyExistsException("Já existe um usuário com o e-mail informado");

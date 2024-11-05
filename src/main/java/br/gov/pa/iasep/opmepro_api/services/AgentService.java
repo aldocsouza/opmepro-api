@@ -19,7 +19,10 @@ public class AgentService {
     }
 
     public List<ResponseAgentDTO> getAllAgents(){
-        return agentUserRepository.findAll().stream().map(userMapper::toResponseAgentDTO).toList();
+        return agentUserRepository.findAll()
+                .stream()
+                .map(userMapper::toResponseAgentDTO)
+                .toList();
     }
 
 }

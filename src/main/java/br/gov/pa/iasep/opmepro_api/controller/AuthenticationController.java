@@ -3,8 +3,8 @@ package br.gov.pa.iasep.opmepro_api.controller;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.dtos.LoginDTOs.LoginRequestDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.LoginDTOs.LoginResponseDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserAgentDTOs.RequestAgentDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.RequestRegularUserDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserAgentDTOs.AgentUserCreateDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.RegularUserCreateDTO;
 import br.gov.pa.iasep.opmepro_api.services.AuthenticationService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -27,13 +27,13 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register-user-agent")
-    public ResponseEntity<ApiResponse> registerUserAgentAccount(@RequestBody @Valid RequestAgentDTO userAgent){
+    public ResponseEntity<ApiResponse> registerUserAgentAccount(@RequestBody @Valid AgentUserCreateDTO userAgent){
         ApiResponse register = authenticationService.createAgentAccount(userAgent);
         return ResponseEntity.status(HttpStatus.CREATED).body(register);
     }
 
     @PostMapping("/register-user-regular")
-    public ResponseEntity<ApiResponse> registerRegularUserAccount(@RequestBody @Valid RequestRegularUserDTO userRegular){
+    public ResponseEntity<ApiResponse> registerRegularUserAccount(@RequestBody @Valid RegularUserCreateDTO userRegular){
         ApiResponse register = authenticationService.createRegularUserAccount(userRegular);
         return ResponseEntity.status(HttpStatus.CREATED).body(register);
     }

@@ -1,7 +1,7 @@
 package br.gov.pa.iasep.opmepro_api.services;
 
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
-import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.RequestFeatureDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.FeatureCreateDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.ResponseFeatureDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.Feature;
 import br.gov.pa.iasep.opmepro_api.repositories.FeatureRepository;
@@ -24,7 +24,7 @@ public class FeatureService {
                 .map(feature -> new ResponseFeatureDTO(feature.getCode(), feature.getDescription())).toList();
     }
 
-    public ApiResponse createFeature(RequestFeatureDTO feature){
+    public ApiResponse createFeature(FeatureCreateDTO feature){
         Feature newFeature = new Feature();
         newFeature.setDescription(feature.description());
         featureRepository.save(newFeature);

@@ -1,9 +1,8 @@
 package br.gov.pa.iasep.opmepro_api.controller;
 
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
-import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.RequestFeatureDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.FeatureCreateDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.ResponseFeatureDTO;
-import br.gov.pa.iasep.opmepro_api.model.entities.Feature;
 import br.gov.pa.iasep.opmepro_api.services.FeatureService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +26,7 @@ public class FeatureController {
     }
 
     @PostMapping("/create-feature")
-    public ResponseEntity<ApiResponse> createFeature(@RequestBody RequestFeatureDTO feature){
+    public ResponseEntity<ApiResponse> createFeature(@RequestBody FeatureCreateDTO feature){
         ApiResponse response = featureService.createFeature(feature);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
