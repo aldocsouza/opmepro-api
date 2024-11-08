@@ -1,6 +1,8 @@
 package br.gov.pa.iasep.opmepro_api.services;
 
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponseRegularUserDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponseRegularUserNoListDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponserRegularUserAndFeaturesDTO;
 import br.gov.pa.iasep.opmepro_api.model.interfaces.mappers.UserMapper;
 import br.gov.pa.iasep.opmepro_api.repositories.RegularUserRepository;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,15 @@ public class RegularUserService {
     }
 
     public List<ResponseRegularUserDTO> getAllRegularUsers(){
-        return regularUserRepository.findAll().stream().map(userMapper::toResponseRegularDTO).toList();
+        return regularUserRepository.findAll().stream().map(userMapper::toRegularUserDTO).toList();
+    }
+
+    public List<ResponserRegularUserAndFeaturesDTO> getAllRegularUsersAndFeatures(){
+        return regularUserRepository.findAll().stream().map(userMapper::toRegularUserAndFeaturesDTO).toList();
+    }
+
+    public List<ResponseRegularUserNoListDTO> getAllRegularUsersNoList(){
+        return regularUserRepository.findAll().stream().map(userMapper::toRegularUserNoListDTO).toList();
     }
 
 }

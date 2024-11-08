@@ -23,7 +23,6 @@ public record AgentUserUpdateDTO(
         @NotNull @NotBlank
         String username,
 
-        @NotNull @NotBlank
         String password,
 
         @NotNull @NotBlank
