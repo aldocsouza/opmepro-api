@@ -1,6 +1,5 @@
 package br.gov.pa.iasep.opmepro_api.services;
 
-import br.gov.pa.iasep.opmepro_api.exceptions.AlreadyExistsException;
 import br.gov.pa.iasep.opmepro_api.exceptions.NotFoundException;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserAgentDTOs.AgentUserUpdateDTO;
@@ -10,7 +9,6 @@ import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserAgentDTOs.ResponseAg
 import br.gov.pa.iasep.opmepro_api.model.entities.AgentUser;
 import br.gov.pa.iasep.opmepro_api.model.interfaces.mappers.UserMapper;
 import br.gov.pa.iasep.opmepro_api.repositories.AgentUserRepository;
-import br.gov.pa.iasep.opmepro_api.repositories.RegularUserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +18,16 @@ import java.util.List;
 public class AgentService {
 
     private final AgentUserRepository agentUserRepository;
-    private final RegularUserRepository regularUserRepository;
     private final UserMapper userMapper;
+    private final UserValidationService userValidationService;
 
-    public AgentService(AgentUserRepository agentUserRepository, UserMapper userMapper, RegularUserRepository regularUserRepository){
+    public AgentService(
+            AgentUserRepository agentUserRepository, UserMapper userMapper,
+            UserValidationService userValidationService
+    ){
         this.agentUserRepository = agentUserRepository;
-        this.regularUserRepository = regularUserRepository;
         this.userMapper = userMapper;
+        this.userValidationService = userValidationService;
     }
 
     public List<ResponseAgentDTO> getAllAgents(){
@@ -57,26 +58,23 @@ public class AgentService {
         if(agentUser == null) throw new NotFoundException("Usuário não encontrado");
 
         if(!agentUser.getCpf().equals(updateDTO.cpf())){
-            if(agentUserRepository.findByCpf(updateDTO.cpf()) != null) throw new AlreadyExistsException("Já existe um usuário com o CPF informado");
-            if(regularUserRepository.findByCpf(updateDTO.cpf()) != null) throw new AlreadyExistsException("Já existe um usuário com o CPF informado");
+            this.userValidationService.checkForDuplicateCpf(updateDTO.cpf());
             agentUser.setCpf(updateDTO.cpf());
         }
 
         if(!agentUser.getRegistry().equals(updateDTO.registry())){
-            if(agentUserRepository.findByRegistry(updateDTO.registry()) != null) throw new AlreadyExistsException("Já existe um usuário com a matrícula informada");
+            this.userValidationService.checkForDuplicateRegistry(updateDTO.registry());
             agentUser.setRegistry(updateDTO.registry());
             agentUser.setAffiliation(updateDTO.affiliation());
         }
 
         if(!agentUser.getUsername().equals(updateDTO.username())){
-            if(agentUserRepository.findByUsername(updateDTO.username()) != null) throw new AlreadyExistsException("Já existe um usuário com o login informado");
-            if(regularUserRepository.findByUsername(updateDTO.username()) != null) throw new AlreadyExistsException("Já existe um usuário com o login informado");
+            this.userValidationService.checkForDuplicateUsername(updateDTO.username());
             agentUser.setUsername(updateDTO.username());
         }
 
          if(!agentUser.getEmail().equals(updateDTO.email())){
-             if(agentUserRepository.findByEmail(updateDTO.email()) != null)  throw new AlreadyExistsException("Já existe um usuário com o e-mail informado");
-             if(regularUserRepository.findByEmail(updateDTO.email()) != null) throw new AlreadyExistsException("Já existe um usuário com o e-mail informado");
+             this.userValidationService.checkForDuplicateEmail(updateDTO.email());
              agentUser.setEmail(updateDTO.email());
         }
 

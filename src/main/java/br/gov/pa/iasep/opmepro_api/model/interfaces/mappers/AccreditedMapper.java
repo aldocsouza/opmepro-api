@@ -3,6 +3,7 @@ package br.gov.pa.iasep.opmepro_api.model.interfaces.mappers;
 import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.AccreditedAndUsersDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.AccreditedCreateDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.ResponseAccreditedDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.UserAccreditedCreateDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.Accredited;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -19,5 +20,7 @@ public interface AccreditedMapper {
     AccreditedAndUsersDTO toResponseUsersDTO(Accredited accredited);
 
     Accredited toEntity(AccreditedCreateDTO accreditedDTO);
+
+    Accredited toEntity(UserAccreditedCreateDTO accreditedDTO);
 
 }

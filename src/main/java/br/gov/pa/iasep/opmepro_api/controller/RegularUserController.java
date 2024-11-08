@@ -1,16 +1,14 @@
 package br.gov.pa.iasep.opmepro_api.controller;
 
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserAgentDTOs.ResponseAgentAndFeaturesDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserAgentDTOs.ResponseAgentNoListDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.RegularUserUpdateDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponseRegularUserDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponseRegularUserNoListDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponserRegularUserAndFeaturesDTO;
 import br.gov.pa.iasep.opmepro_api.services.RegularUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,6 +36,12 @@ public class RegularUserController {
     @GetMapping("/users-no-list")
     public ResponseEntity<List<ResponseRegularUserNoListDTO>> getAllRegularUsersNoList(){
         return ResponseEntity.status(HttpStatus.OK).body(regularUserService.getAllRegularUsersNoList());
+    }
+
+    @PutMapping("/update-no-list")
+    public ResponseEntity<ApiResponse> updateRegularUser(@RequestBody RegularUserUpdateDTO updateDTO){
+        ApiResponse update = regularUserService.updateRegularUser(updateDTO);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(update);
     }
 
 }
