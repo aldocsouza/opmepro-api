@@ -47,6 +47,8 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/api/accredited/create-accredited").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/api/agents/update-no-list").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/api/regular/update-no-list").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/session/logout-agent").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/session/logout-regular").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
