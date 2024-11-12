@@ -111,6 +111,11 @@ public class AuthenticationService {
         }
 
         if (user != null && new BCryptPasswordEncoder().matches(loginRequestDTO.password(), user.getPassword())) {
+
+            if(!user.getStatus()){
+                throw new UnauthorizedException("Usuário não autorizado, a conta deste usuário está desativada!");
+            }
+
             var token = tokenService.generateToken(user);
 
             if (user instanceof AgentUser agentUser){
