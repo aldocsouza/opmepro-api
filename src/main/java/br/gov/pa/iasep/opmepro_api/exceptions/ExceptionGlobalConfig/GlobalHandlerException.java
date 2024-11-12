@@ -13,8 +13,10 @@ import java.util.Map;
 public class GlobalHandlerException {
 
     @ExceptionHandler(UnauthorizedException.class)
-    public ResponseEntity<String> unauthorizedException(UnauthorizedException e){
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+    public ResponseEntity<Map<String, String>> unauthorizedException(UnauthorizedException e){
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("message", e.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(AlreadyExistsException.class)

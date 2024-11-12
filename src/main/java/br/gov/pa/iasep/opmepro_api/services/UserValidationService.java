@@ -19,17 +19,17 @@ public class UserValidationService {
     }
 
     public void checkForDuplicateUsername(String username) {
-        if(agentUserRepository.findByUsername(username) != null && regularUserRepository.findByUsername(username) != null)
+        if(agentUserRepository.findByUsername(username) != null || regularUserRepository.findByUsername(username) != null)
             throw new AlreadyExistsException("Já existe um usuário com o login informado");
     }
 
     public void checkForDuplicateCpf(String cpf) {
-        if(agentUserRepository.findByCpf(cpf) != null && regularUserRepository.findByCpf(cpf) != null)
+        if(agentUserRepository.findByCpf(cpf) != null || regularUserRepository.findByCpf(cpf) != null)
             throw new AlreadyExistsException("Já existe um usuário com o CPF informado");
     }
 
     public void checkForDuplicateEmail(String email) {
-        if(agentUserRepository.findByEmail(email) != null && regularUserRepository.findByEmail(email) != null)
+        if(agentUserRepository.findByEmail(email) != null || regularUserRepository.findByEmail(email) != null)
             throw new AlreadyExistsException("Já existe um usuário com o e-mail informado");
     }
 
