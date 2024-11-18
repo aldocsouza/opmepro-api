@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "historico_material_opme")
@@ -32,4 +34,8 @@ public class MaterialHistory {
 
     @Column(name = "data_alteracao", nullable = false)
     private LocalDateTime modificationDate;
+
+    @ManyToOne
+    @JoinColumn(name = "cod_material_opme", nullable = false)
+    private Material material;
 }

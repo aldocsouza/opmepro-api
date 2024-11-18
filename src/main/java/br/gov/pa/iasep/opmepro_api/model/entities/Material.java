@@ -33,4 +33,7 @@ public class Material {
 
     @ManyToMany(mappedBy = "materials")
     private List<Accredited> accrediteds = new ArrayList<>();
+
+    @OneToMany(mappedBy = "material")
+    private List<MaterialHistory> materialHistories = new ArrayList<>();
 }
