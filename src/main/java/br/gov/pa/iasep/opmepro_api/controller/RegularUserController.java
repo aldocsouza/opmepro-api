@@ -1,5 +1,6 @@
 package br.gov.pa.iasep.opmepro_api.controller;
 
+import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.ResponseAccreditedDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.RegularUserUpdateDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponseRegularUserDTO;
@@ -38,10 +39,14 @@ public class RegularUserController {
         return ResponseEntity.status(HttpStatus.OK).body(regularUserService.getAllRegularUsersNoList());
     }
 
+    @GetMapping("/users-accredited")
+    public ResponseEntity<ResponseAccreditedDTO> getAccreditedFromUser(@RequestParam Integer code){
+        return ResponseEntity.status(HttpStatus.OK).body(regularUserService.getAccreditedFromUser(code));
+    }
+
     @PutMapping("/update-no-list")
     public ResponseEntity<ApiResponse> updateRegularUser(@RequestBody RegularUserUpdateDTO updateDTO){
         ApiResponse update = regularUserService.updateRegularUser(updateDTO);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(update);
     }
-
 }

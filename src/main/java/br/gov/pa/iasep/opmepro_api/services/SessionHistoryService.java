@@ -55,7 +55,6 @@ public class SessionHistoryService {
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
         SessionHistoryAgent sessionHistoryAgent = sessionHistoryAgentRepository.findTopByAgentOrderByLoginDateDesc(agentUser);
-        System.out.println(sessionHistoryAgent.getCode());
         sessionHistoryAgent.setLogoutDate(logout);
 
         sessionHistoryAgentRepository.save(sessionHistoryAgent);

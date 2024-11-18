@@ -1,13 +1,10 @@
 package br.gov.pa.iasep.opmepro_api.controller;
 
-import br.gov.pa.iasep.opmepro_api.model.enums.UserRole;
 import br.gov.pa.iasep.opmepro_api.services.SessionHistoryService;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api/session")

@@ -4,9 +4,13 @@ import br.gov.pa.iasep.opmepro_api.exceptions.FeatureNotFoundException;
 import br.gov.pa.iasep.opmepro_api.exceptions.NotFoundException;
 import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.RequestRegularFeatureDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.UserPermissionsDTO;
-import br.gov.pa.iasep.opmepro_api.model.entities.*;
+import br.gov.pa.iasep.opmepro_api.model.entities.Feature;
+import br.gov.pa.iasep.opmepro_api.model.entities.RegularUser;
+import br.gov.pa.iasep.opmepro_api.model.entities.RegularUserFeature;
 import br.gov.pa.iasep.opmepro_api.model.interfaces.mappers.UserFeatureMapper;
-import br.gov.pa.iasep.opmepro_api.repositories.*;
+import br.gov.pa.iasep.opmepro_api.repositories.FeatureRepository;
+import br.gov.pa.iasep.opmepro_api.repositories.RegularFeatureRepository;
+import br.gov.pa.iasep.opmepro_api.repositories.RegularUserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

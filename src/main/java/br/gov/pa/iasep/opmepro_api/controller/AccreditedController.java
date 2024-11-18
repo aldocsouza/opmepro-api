@@ -31,5 +31,4 @@ public class AccreditedController {
         ApiResponse response = accreditedService.createAccredited(accredited);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
-
 }

@@ -1,6 +1,7 @@
 package br.gov.pa.iasep.opmepro_api.services;
 
 import br.gov.pa.iasep.opmepro_api.exceptions.NotFoundException;
+import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.ResponseAccreditedDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.RegularUserUpdateDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponseRegularUserDTO;
@@ -43,6 +44,12 @@ public class RegularUserService {
 
     public List<ResponseRegularUserNoListDTO> getAllRegularUsersNoList(){
         return regularUserRepository.findAll().stream().map(userMapper::toRegularUserNoListDTO).toList();
+    }
+
+    public ResponseAccreditedDTO getAccreditedFromUser(Integer code){
+        RegularUser regularUser = regularUserRepository.findById(code)
+                .orElseThrow(() -> new NotFoundException("Usuário não encontrado."));
+        return accreditedMapper.toResponseDTO(regularUser.getAccredited());
     }
 
     public ApiResponse updateRegularUser(RegularUserUpdateDTO updateDTO){

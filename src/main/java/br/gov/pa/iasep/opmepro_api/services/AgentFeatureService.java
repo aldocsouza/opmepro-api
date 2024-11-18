@@ -1,9 +1,7 @@
 package br.gov.pa.iasep.opmepro_api.services;
 
-import br.gov.pa.iasep.opmepro_api.exceptions.FeatureAlreadyExistsException;
 import br.gov.pa.iasep.opmepro_api.exceptions.FeatureNotFoundException;
 import br.gov.pa.iasep.opmepro_api.exceptions.NotFoundException;
-import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.RequestAgentFeatureDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.UserPermissionsDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.AgentFeature;

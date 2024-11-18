@@ -31,6 +31,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET, "/api/regular/users").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/regular/users-features").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/regular/users-no-list").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/regular/users-accredited").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/agents/users").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/agents/users-features").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/agents/users-no-list").permitAll()

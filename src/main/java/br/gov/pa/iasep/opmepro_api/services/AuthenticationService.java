@@ -2,8 +2,8 @@ package br.gov.pa.iasep.opmepro_api.services;
 
 import br.gov.pa.iasep.opmepro_api.base.User;
 import br.gov.pa.iasep.opmepro_api.config.security.TokenService;
-import br.gov.pa.iasep.opmepro_api.exceptions.UnauthorizedException;
 import br.gov.pa.iasep.opmepro_api.exceptions.AlreadyExistsException;
+import br.gov.pa.iasep.opmepro_api.exceptions.UnauthorizedException;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.dtos.LoginDTOs.LoginRequestDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.LoginDTOs.LoginResponseDTO;

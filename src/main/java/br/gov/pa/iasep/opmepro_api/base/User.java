@@ -1,18 +1,12 @@
 package br.gov.pa.iasep.opmepro_api.base;
 
-import br.gov.pa.iasep.opmepro_api.model.entities.AgentFeature;
-import br.gov.pa.iasep.opmepro_api.model.entities.RegularUser;
-import br.gov.pa.iasep.opmepro_api.model.entities.SessionHistoryAgent;
-import br.gov.pa.iasep.opmepro_api.model.entities.SessionHistoryRegularUser;
 import br.gov.pa.iasep.opmepro_api.model.enums.UserRole;
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
