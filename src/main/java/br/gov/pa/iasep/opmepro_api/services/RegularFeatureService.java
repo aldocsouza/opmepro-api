@@ -4,13 +4,12 @@ import br.gov.pa.iasep.opmepro_api.exceptions.FeatureNotFoundException;
 import br.gov.pa.iasep.opmepro_api.exceptions.NotFoundException;
 import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.RequestRegularFeatureDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.UserPermissionsDTO;
-import br.gov.pa.iasep.opmepro_api.model.entities.Feature;
-import br.gov.pa.iasep.opmepro_api.model.entities.RegularUser;
-import br.gov.pa.iasep.opmepro_api.model.entities.RegularUserFeature;
+import br.gov.pa.iasep.opmepro_api.model.entities.Funcionalidade;
+import br.gov.pa.iasep.opmepro_api.model.entities.UsuarioFuncionalidade;
 import br.gov.pa.iasep.opmepro_api.model.interfaces.mappers.UserFeatureMapper;
 import br.gov.pa.iasep.opmepro_api.repositories.FeatureRepository;
-import br.gov.pa.iasep.opmepro_api.repositories.RegularFeatureRepository;
-import br.gov.pa.iasep.opmepro_api.repositories.RegularUserRepository;
+import br.gov.pa.iasep.opmepro_api.repositories.UserFeatureRepository;
+import br.gov.pa.iasep.opmepro_api.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,29 +18,29 @@ import java.util.stream.Collectors;
 @Service
 public class RegularFeatureService {
 
-    private final RegularFeatureRepository regularFeatureRepository;
+    private final UserFeatureRepository userFeatureRepository;
     private final FeatureRepository featureRepository;
-    private final RegularUserRepository regularUserRepository;
+    private final UserRepository userRepository;
     private final UserFeatureMapper userFeatureMapper;
 
     public RegularFeatureService(
-            RegularFeatureRepository regularFeatureRepository,
+            UserFeatureRepository userFeatureRepository,
             FeatureRepository featureRepository,
-            RegularUserRepository regularUserRepository,
+            UserRepository userRepository,
             UserFeatureMapper userFeatureMapper
     )
     {
-        this.regularFeatureRepository = regularFeatureRepository;
+        this.userFeatureRepository = userFeatureRepository;
         this.featureRepository = featureRepository;
-        this.regularUserRepository = regularUserRepository;
+        this.userRepository = userRepository;
         this.userFeatureMapper = userFeatureMapper;
     }
 
     public List<UserPermissionsDTO> getAllPermissions(Integer code){
-        RegularUser regularUser = regularUserRepository.findById(code)
+        RegularUser regularUser = userRepository.findById(code)
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
-        return regularFeatureRepository.findByRegularUser(regularUser)
+        return userFeatureRepository.findByRegularUser(regularUser)
                 .stream()
                 .map(userFeatureMapper::toUserPermissionsDTO)
                 .collect(Collectors.toList());
@@ -49,19 +48,19 @@ public class RegularFeatureService {
 
     public void assignFeature(RequestRegularFeatureDTO userFeature){
 
-        Feature feature = featureRepository.findById(userFeature.featureCode())
+        Funcionalidade funcionalidade = featureRepository.findById(userFeature.featureCode())
                 .orElseThrow(() -> new FeatureNotFoundException("Funcionalidade não encontrada!"));
 
-        RegularUser regularUser = regularUserRepository.findById(userFeature.userCode())
+        RegularUser regularUser = userRepository.findById(userFeature.userCode())
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
-        RegularUserFeature regularUserFeature = new RegularUserFeature();
-        regularUserFeature.setFeature(feature);
-        regularUserFeature.setRegularUser(regularUser);
-        regularUserFeature.setReading(userFeature.reading());
-        regularUserFeature.setWriting(userFeature.writing());
+        UsuarioFuncionalidade regularUsuarioFuncionalidade = new UsuarioFuncionalidade();
+        regularUsuarioFuncionalidade.setFuncionalidade(funcionalidade);
+        regularUsuarioFuncionalidade.setRegularUser(regularUser);
+        regularUsuarioFuncionalidade.setReading(userFeature.reading());
+        regularUsuarioFuncionalidade.setWriting(userFeature.writing());
 
-        regularFeatureRepository.save(regularUserFeature);
+        userFeatureRepository.save(regularUsuarioFuncionalidade);
     }
 
 }

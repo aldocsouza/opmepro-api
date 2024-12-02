@@ -4,7 +4,7 @@ import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.AccreditedAndUsersD
 import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.AccreditedCreateDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.ResponseAccreditedDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.UserAccreditedCreateDTO;
-import br.gov.pa.iasep.opmepro_api.model.entities.Accredited;
+import br.gov.pa.iasep.opmepro_api.model.entities.Credenciado;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -13,14 +13,14 @@ public interface AccreditedMapper {
 
     AccreditedMapper INSTANCE = Mappers.getMapper(AccreditedMapper.class);
 
-    AccreditedCreateDTO toRequestDTO(Accredited accredited);
+    AccreditedCreateDTO toRequestDTO(Credenciado credenciado);
 
-    ResponseAccreditedDTO toResponseDTO(Accredited accredited);
+    ResponseAccreditedDTO toResponseDTO(Credenciado credenciado);
 
-    AccreditedAndUsersDTO toResponseUsersDTO(Accredited accredited);
+    AccreditedAndUsersDTO toResponseUsersDTO(Credenciado credenciado);
 
-    Accredited toEntity(AccreditedCreateDTO accreditedDTO);
+    Credenciado toEntity(AccreditedCreateDTO accreditedDTO);
 
-    Accredited toEntity(UserAccreditedCreateDTO accreditedDTO);
+    Credenciado toEntity(UserAccreditedCreateDTO accreditedDTO);
 
 }

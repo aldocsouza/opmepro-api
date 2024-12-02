@@ -1,6 +1,5 @@
 package br.gov.pa.iasep.opmepro_api.model.entities;
 
-import br.gov.pa.iasep.opmepro_api.base.BaseMaterial;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,21 +10,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "material_opme")
+@Table(name = "perfil_usuario")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Material extends BaseMaterial {
+public class UsuarioPerfil {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(mappedBy = "material")
-    private List<CodificacaoMaterial> codificacoes = new ArrayList<>();
+    @Column(name = "descricao", nullable = false)
+    private String descricao;
 
-    @OneToMany(mappedBy = "material")
-    private List<MaterialHistorico> materialHistoricoList = new ArrayList<>();
+    @OneToMany(mappedBy = "perfil", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Usuario> usuarioList = new ArrayList<>();
 
 }

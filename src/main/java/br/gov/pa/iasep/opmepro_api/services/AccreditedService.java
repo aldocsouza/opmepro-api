@@ -5,7 +5,7 @@ import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.AccreditedAndUsersD
 import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.AccreditedCreateDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.ResponseAccreditedDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
-import br.gov.pa.iasep.opmepro_api.model.entities.Accredited;
+import br.gov.pa.iasep.opmepro_api.model.entities.Credenciado;
 import br.gov.pa.iasep.opmepro_api.model.interfaces.mappers.AccreditedMapper;
 import br.gov.pa.iasep.opmepro_api.repositories.AccreditedRepository;
 import org.springframework.stereotype.Service;
@@ -42,9 +42,9 @@ public class AccreditedService {
         if(accreditedRepository.findByCnpj(accreditedDTO.cnpj()) != null)
             throw new AlreadyExistsException("Já existe um credenciado com o CNPJ Nº " + accreditedDTO.cnpj() + " informado.");
 
-        Accredited accredited = accreditedMapper.toEntity(accreditedDTO);
+        Credenciado credenciado = accreditedMapper.toEntity(accreditedDTO);
 
-        accreditedRepository.save(accredited);
+        accreditedRepository.save(credenciado);
 
         return new ApiResponse("Credenciado cadastrado com sucesso!", true);
     }

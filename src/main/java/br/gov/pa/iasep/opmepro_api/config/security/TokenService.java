@@ -1,8 +1,6 @@
 package br.gov.pa.iasep.opmepro_api.config.security;
 
-import br.gov.pa.iasep.opmepro_api.base.User;
-import br.gov.pa.iasep.opmepro_api.model.entities.AgentUser;
-import br.gov.pa.iasep.opmepro_api.model.entities.RegularUser;
+import br.gov.pa.iasep.opmepro_api.model.entities.Usuario;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -21,35 +19,35 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
-    public String generateToken(User user){
+    public String generateToken(Usuario usuario){
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
             JWTCreator.Builder jwtBuilder = JWT.create()
                     .withIssuer("opmepro-api")
-                    .withSubject(user.getUsername())
-                    .withClaim("name", user.getName())
-                    .withClaim("cpf", user.getCpf())
-                    .withClaim("phone", user.getPhone())
-                    .withClaim("email", user.getEmail())
-                    .withClaim("role", user.getRole().toString())
-                    .withClaim("status", user.getStatus())
+                    .withSubject(usuario.getUsername())
+                    .withClaim("name", usuario.getName())
+                    .withClaim("cpf", usuario.getCpf())
+                    .withClaim("phone", usuario.getPhone())
+                    .withClaim("email", usuario.getEmail())
+                    .withClaim("role", usuario.getRole().toString())
+                    .withClaim("status", usuario.getStatus())
                     .withExpiresAt(generateExpirationDate());
 
-                    if (user instanceof AgentUser) {
-                        AgentUser agentUser = (AgentUser) user;
+                    if (usuario instanceof AgentUser) {
+                        AgentUser agentUser = (AgentUser) usuario;
                         jwtBuilder.withClaim("code", agentUser.getCode());
                         jwtBuilder.withClaim("registry", agentUser.getRegistry());
                         jwtBuilder.withClaim("affiliation", agentUser.getAffiliation());
 
-                        if (user.getLastSession() != null) {
-                            jwtBuilder.withClaim("lastSession", user.getLastSession().toString());
+                        if (usuario.getLastSession() != null) {
+                            jwtBuilder.withClaim("lastSession", usuario.getLastSession().toString());
                         }
-                    } else if (user instanceof RegularUser) {
-                        RegularUser regularUser = (RegularUser) user;
+                    } else if (usuario instanceof RegularUser) {
+                        RegularUser regularUser = (RegularUser) usuario;
                         jwtBuilder.withClaim("code", regularUser.getCode());
 
-                        if (user.getLastSession() != null) {
-                            jwtBuilder.withClaim("lastSession", user.getLastSession().toString());
+                        if (usuario.getLastSession() != null) {
+                            jwtBuilder.withClaim("lastSession", usuario.getLastSession().toString());
                         }
                     }
 

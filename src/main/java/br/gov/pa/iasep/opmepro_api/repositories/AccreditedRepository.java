@@ -1,11 +1,11 @@
 package br.gov.pa.iasep.opmepro_api.repositories;
 
-import br.gov.pa.iasep.opmepro_api.model.entities.Accredited;
+import br.gov.pa.iasep.opmepro_api.model.entities.Credenciado;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AccreditedRepository extends JpaRepository<Accredited, Integer> {
+public interface AccreditedRepository extends JpaRepository<Credenciado, Integer> {
 
-    Accredited findByContractNumber(String contractNumber);
-    Accredited findByRegistry(String registry);
-    Accredited findByCnpj(String cnpj);
+    Credenciado findByContractNumber(String contractNumber);
+    Credenciado findByRegistry(String registry);
+    Credenciado findByCnpj(String cnpj);
 }

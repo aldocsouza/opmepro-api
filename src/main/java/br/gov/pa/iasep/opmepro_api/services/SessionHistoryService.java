@@ -1,14 +1,9 @@
 package br.gov.pa.iasep.opmepro_api.services;
 
 import br.gov.pa.iasep.opmepro_api.exceptions.NotFoundException;
-import br.gov.pa.iasep.opmepro_api.model.entities.AgentUser;
-import br.gov.pa.iasep.opmepro_api.model.entities.RegularUser;
-import br.gov.pa.iasep.opmepro_api.model.entities.SessionHistoryAgent;
-import br.gov.pa.iasep.opmepro_api.model.entities.SessionHistoryRegularUser;
-import br.gov.pa.iasep.opmepro_api.repositories.AgentUserRepository;
-import br.gov.pa.iasep.opmepro_api.repositories.RegularUserRepository;
-import br.gov.pa.iasep.opmepro_api.repositories.SessionHistoryAgentRepository;
-import br.gov.pa.iasep.opmepro_api.repositories.SessionHistoryRegularRepository;
+import br.gov.pa.iasep.opmepro_api.model.entities.UsuarioHistoricoSessao;
+import br.gov.pa.iasep.opmepro_api.repositories.UserRepository;
+import br.gov.pa.iasep.opmepro_api.repositories.SessionHistoryUserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,19 +15,19 @@ import java.time.format.DateTimeFormatter;
 public class SessionHistoryService {
 
     private final SessionHistoryAgentRepository sessionHistoryAgentRepository;
-    private final SessionHistoryRegularRepository sessionHistoryRegularRepository;
+    private final SessionHistoryUserRepository sessionHistoryUserRepository;
     private final AgentUserRepository agentUserRepository;
-    private final RegularUserRepository regularUserRepository;
+    private final UserRepository userRepository;
 
     public SessionHistoryService(
             SessionHistoryAgentRepository sessionHistoryAgentRepository,
-            SessionHistoryRegularRepository sessionHistoryRegularRepository,
-            AgentUserRepository agentUserRepository, RegularUserRepository regularUserRepository
+            SessionHistoryUserRepository sessionHistoryUserRepository,
+            AgentUserRepository agentUserRepository, UserRepository userRepository
     ) {
         this.sessionHistoryAgentRepository = sessionHistoryAgentRepository;
-        this.sessionHistoryRegularRepository = sessionHistoryRegularRepository;
+        this.sessionHistoryUserRepository = sessionHistoryUserRepository;
         this.agentUserRepository = agentUserRepository;
-        this.regularUserRepository = regularUserRepository;
+        this.userRepository = userRepository;
     }
 
     public void startSessionHistoryAgent(AgentUser agentUser, String ipClient){
@@ -61,14 +56,14 @@ public class SessionHistoryService {
     }
 
     public void startSessionHistoryRegular(RegularUser regularUser, String ipClient){
-        SessionHistoryRegularUser historyRegularUser = new SessionHistoryRegularUser(
+        UsuarioHistoricoSessao historyRegularUser = new UsuarioHistoricoSessao(
                 LocalDateTime.now(),
                 null,
                 ipClient,
                 null,
                 regularUser
         );
-        sessionHistoryRegularRepository.save(historyRegularUser);
+        sessionHistoryUserRepository.save(historyRegularUser);
     }
 
     public void endSessionHistoryRegular(String logoutDate, Integer code){
@@ -76,13 +71,13 @@ public class SessionHistoryService {
         ZonedDateTime utcDateTime = ZonedDateTime.parse(logoutDate, formatter);
         LocalDateTime logout = utcDateTime.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
 
-        RegularUser regularUser = regularUserRepository.findById(code)
+        RegularUser regularUser = userRepository.findById(code)
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
-        SessionHistoryRegularUser sessionHistoryRegularUser = sessionHistoryRegularRepository.findTopByRegularUserOrderByLoginDateDesc(regularUser);
-        sessionHistoryRegularUser.setLogoutDate(logout);
+        UsuarioHistoricoSessao usuarioHistoricoSessao = sessionHistoryUserRepository.findTopByRegularUserOrderByLoginDateDesc(regularUser);
+        usuarioHistoricoSessao.setLogoutDate(logout);
 
-        sessionHistoryRegularRepository.save(sessionHistoryRegularUser);
+        sessionHistoryUserRepository.save(usuarioHistoricoSessao);
     }
 
 }

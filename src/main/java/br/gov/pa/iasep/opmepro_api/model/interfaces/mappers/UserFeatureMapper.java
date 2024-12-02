@@ -1,8 +1,7 @@
 package br.gov.pa.iasep.opmepro_api.model.interfaces.mappers;
 
 import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.UserPermissionsDTO;
-import br.gov.pa.iasep.opmepro_api.model.entities.AgentFeature;
-import br.gov.pa.iasep.opmepro_api.model.entities.RegularUserFeature;
+import br.gov.pa.iasep.opmepro_api.model.entities.UsuarioFuncionalidade;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -12,6 +11,6 @@ public interface UserFeatureMapper {
     UserFeatureMapper INSTANCE = Mappers.getMapper(UserFeatureMapper.class);
 
     UserPermissionsDTO toUserPermissionsDTO(AgentFeature agentFeature);
-    UserPermissionsDTO toUserPermissionsDTO(RegularUserFeature regularUserFeature);
+    UserPermissionsDTO toUserPermissionsDTO(UsuarioFuncionalidade usuarioFuncionalidade);
 
 }

@@ -1,7 +1,6 @@
 package br.gov.pa.iasep.opmepro_api.config.security;
 
-import br.gov.pa.iasep.opmepro_api.repositories.AgentUserRepository;
-import br.gov.pa.iasep.opmepro_api.repositories.RegularUserRepository;
+import br.gov.pa.iasep.opmepro_api.repositories.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,7 +24,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     AgentUserRepository agentUserRepository;
 
     @Autowired
-    RegularUserRepository regularUserRepository;
+    UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -54,7 +53,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         // Se não encontrou, tenta encontrar um RegularUser
         if (user == null) {
-            user = regularUserRepository.findByUsername(username);
+            user = userRepository.findByUsername(username);
         }
 
         return user; // Retorna o usuário encontrado ou null

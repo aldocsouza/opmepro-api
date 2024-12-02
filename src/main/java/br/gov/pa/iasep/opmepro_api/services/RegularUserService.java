@@ -7,10 +7,9 @@ import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.RegularU
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponseRegularUserDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponseRegularUserNoListDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponserRegularUserAndFeaturesDTO;
-import br.gov.pa.iasep.opmepro_api.model.entities.RegularUser;
 import br.gov.pa.iasep.opmepro_api.model.interfaces.mappers.AccreditedMapper;
 import br.gov.pa.iasep.opmepro_api.model.interfaces.mappers.UserMapper;
-import br.gov.pa.iasep.opmepro_api.repositories.RegularUserRepository;
+import br.gov.pa.iasep.opmepro_api.repositories.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,41 +18,41 @@ import java.util.List;
 @Service
 public class RegularUserService {
 
-    private final RegularUserRepository regularUserRepository;
+    private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final AccreditedMapper accreditedMapper;
     private final UserValidationService userValidationService;
 
     public RegularUserService(
-            RegularUserRepository regularUserRepository, UserValidationService userValidationService,
+            UserRepository userRepository, UserValidationService userValidationService,
             UserMapper userMapper, AccreditedMapper accreditedMapper
     ) {
-        this.regularUserRepository = regularUserRepository;
+        this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.accreditedMapper = accreditedMapper;
         this.userValidationService = userValidationService;
     }
 
     public List<ResponseRegularUserDTO> getAllRegularUsers(){
-        return regularUserRepository.findAll().stream().map(userMapper::toRegularUserDTO).toList();
+        return userRepository.findAll().stream().map(userMapper::toRegularUserDTO).toList();
     }
 
     public List<ResponserRegularUserAndFeaturesDTO> getAllRegularUsersAndFeatures(){
-        return regularUserRepository.findAll().stream().map(userMapper::toRegularUserAndFeaturesDTO).toList();
+        return userRepository.findAll().stream().map(userMapper::toRegularUserAndFeaturesDTO).toList();
     }
 
     public List<ResponseRegularUserNoListDTO> getAllRegularUsersNoList(){
-        return regularUserRepository.findAll().stream().map(userMapper::toRegularUserNoListDTO).toList();
+        return userRepository.findAll().stream().map(userMapper::toRegularUserNoListDTO).toList();
     }
 
     public ResponseAccreditedDTO getAccreditedFromUser(Integer code){
-        RegularUser regularUser = regularUserRepository.findById(code)
+        RegularUser regularUser = userRepository.findById(code)
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado."));
         return accreditedMapper.toResponseDTO(regularUser.getAccredited());
     }
 
     public ApiResponse updateRegularUser(RegularUserUpdateDTO updateDTO){
-        RegularUser regularUser = regularUserRepository.findById(updateDTO.code())
+        RegularUser regularUser = userRepository.findById(updateDTO.code())
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
         if(!regularUser.getUsername().equals(updateDTO.username())){
@@ -86,7 +85,7 @@ public class RegularUserService {
         regularUser.setStatus(updateDTO.status());
         regularUser.setRole(updateDTO.role());
 
-        regularUserRepository.save(regularUser);
+        userRepository.save(regularUser);
 
         return new ApiResponse("Dados atualizados com sucesso.", true);
     }
