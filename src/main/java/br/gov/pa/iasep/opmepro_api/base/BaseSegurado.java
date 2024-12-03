@@ -2,37 +2,97 @@ package br.gov.pa.iasep.opmepro_api.base;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @MappedSuperclass
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public abstract class BaseSegurado {
 
     @Column(name = "nome_segurado", nullable = false)
-    private String nomeSegurado;
+    protected String nomeSegurado;
 
     @Column(name = "cpf", nullable = false)
-    private String cpf;
+    protected String cpf;
 
     @Column(name = "ind_sexo")
-    private String sexo;
+    protected String sexo;
 
     @Column(name = "ind_status")
-    private Boolean status;
+    protected Boolean status;
 
     @Column(name = "nom_situacao", nullable = false)
-    private String situacao;
+    protected String situacao;
 
     @Column(name = "nom_municipio", nullable = false)
-    private String municipio;
+    protected String municipio;
 
     @Column(name = "uf")
-    private String uf;
+    protected String uf;
 
+    public BaseSegurado(String nomeSegurado, String cpf, String sexo, Boolean status, String situacao, String municipio, String uf) {
+        this.nomeSegurado = nomeSegurado;
+        this.cpf = cpf;
+        this.sexo = sexo;
+        this.status = status;
+        this.situacao = situacao;
+        this.municipio = municipio;
+        this.uf = uf;
+    }
+
+    public BaseSegurado() {
+    }
+
+    public String getNomeSegurado() {
+        return nomeSegurado;
+    }
+
+    public void setNomeSegurado(String nomeSegurado) {
+        this.nomeSegurado = nomeSegurado;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
+
+    public String getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(String municipio) {
+        this.municipio = municipio;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
 }

@@ -1,9 +1,9 @@
 package br.gov.pa.iasep.opmepro_api.controller;
 
-import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.AccreditedCreateDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.ResponseAccreditedDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
-import br.gov.pa.iasep.opmepro_api.services.AccreditedService;
+import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.CredenciadoCadastroDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.CredenciadoResumidoDTO;
+import br.gov.pa.iasep.opmepro_api.services.CredenciadoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,24 +11,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/accredited")
+@RequestMapping("/api/credenciado")
 public class CredenciadoController {
 
-    private final AccreditedService accreditedService;
+    private final CredenciadoService credenciadoService;
 
-    public CredenciadoController(AccreditedService accreditedService) {
-        this.accreditedService = accreditedService;
+    public CredenciadoController(CredenciadoService credenciadoService) {
+        this.credenciadoService = credenciadoService;
     }
 
-    @GetMapping("/all-accredited")
-    public ResponseEntity<List<ResponseAccreditedDTO>> getAllAccredites(){
-        List<ResponseAccreditedDTO> accreditedList = accreditedService.getAllAccredited();
+    @GetMapping("/credenciados")
+    public ResponseEntity<List<CredenciadoResumidoDTO>> getCredenciados(){
+        List<CredenciadoResumidoDTO> accreditedList = credenciadoService.getCredenciados();
         return ResponseEntity.status(HttpStatus.OK).body(accreditedList);
     }
 
-    @PostMapping("/create-accredited")
-    public ResponseEntity<ApiResponse> createAccredited(@RequestBody AccreditedCreateDTO accredited){
-        ApiResponse response = accreditedService.createAccredited(accredited);
+    @PostMapping("/cadastrar-credenciado")
+    public ResponseEntity<ApiResponse> cadastrarCredenciado(@RequestBody CredenciadoCadastroDTO accredited){
+        ApiResponse response = credenciadoService.postCredenciado(accredited);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

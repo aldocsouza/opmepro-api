@@ -8,22 +8,22 @@ import lombok.Setter;
 @Table(name = "usuario_funcionalidade")
 @Getter
 @Setter
-@IdClass(UsuarioFuncionalidadeId.class)
 public class UsuarioFuncionalidade {
 
-    @Id
+    @EmbeddedId
+    private UsuarioFuncionalidadeId id;
+
     @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @JoinColumn(name = "id_usuario", insertable = false, updatable = false)
     private Usuario usuario;
 
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_funcionalidade", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "id_funcionalidade", insertable = false, updatable = false)
     private Funcionalidade funcionalidade;
 
     @Column(name = "leitura", nullable = false)
-    private Boolean reading;
+    private Boolean leitura;
 
     @Column(name = "escrita", nullable = false)
-    private Boolean writing;
+    private Boolean escrita;
 }

@@ -25,31 +25,13 @@ public class TokenService {
             JWTCreator.Builder jwtBuilder = JWT.create()
                     .withIssuer("opmepro-api")
                     .withSubject(usuario.getUsername())
-                    .withClaim("name", usuario.getName())
+                    .withClaim("nome", usuario.getNome())
                     .withClaim("cpf", usuario.getCpf())
-                    .withClaim("phone", usuario.getPhone())
+                    .withClaim("telefone", usuario.getTelefone())
                     .withClaim("email", usuario.getEmail())
-                    .withClaim("role", usuario.getRole().toString())
-                    .withClaim("status", usuario.getStatus())
+                    .withClaim("role", usuario.getPerfil().toString())
+                    .withClaim("situacao", usuario.getSituacao())
                     .withExpiresAt(generateExpirationDate());
-
-                    if (usuario instanceof AgentUser) {
-                        AgentUser agentUser = (AgentUser) usuario;
-                        jwtBuilder.withClaim("code", agentUser.getCode());
-                        jwtBuilder.withClaim("registry", agentUser.getRegistry());
-                        jwtBuilder.withClaim("affiliation", agentUser.getAffiliation());
-
-                        if (usuario.getLastSession() != null) {
-                            jwtBuilder.withClaim("lastSession", usuario.getLastSession().toString());
-                        }
-                    } else if (usuario instanceof RegularUser) {
-                        RegularUser regularUser = (RegularUser) usuario;
-                        jwtBuilder.withClaim("code", regularUser.getCode());
-
-                        if (usuario.getLastSession() != null) {
-                            jwtBuilder.withClaim("lastSession", usuario.getLastSession().toString());
-                        }
-                    }
 
             return jwtBuilder.sign(algorithm);
         }catch (JWTCreationException exception){

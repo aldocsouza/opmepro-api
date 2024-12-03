@@ -15,12 +15,12 @@ import lombok.Setter;
 public abstract class BaseMaterial {
 
     @Column(name = "codigo")
-    private String codigo;
+    protected String codigo;
 
     @Column(name = "dsc_material", nullable = false)
-    private String descricao;
+    protected String descricao;
 
     @Column(name = "valor")
-    private Double valor;
+    protected Double valor;
 
 }

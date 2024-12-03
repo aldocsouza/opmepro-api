@@ -12,17 +12,17 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@IdClass(CodificacaoMaterialId.class)
 public class CodificacaoMaterial {
 
-    @Id
+    @EmbeddedId
+    private CodificacaoMaterialId id;
+
     @ManyToOne
-    @JoinColumn(name = "id_solicitacao")
+    @JoinColumn(name = "id_solicitacao", insertable = false, updatable = false)
     private Solicitacao solicitacao;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "id_material_opme")
+    @JoinColumn(name = "id_material_opme", insertable = false, updatable = false)
     private Material material;
 
     @Column(name = "qtd_solicitado", nullable = false)

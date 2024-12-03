@@ -25,6 +25,6 @@ public class UsuarioPerfil {
     private String descricao;
 
     @OneToMany(mappedBy = "perfil", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Usuario> usuarioList = new ArrayList<>();
+    private List<Usuario> usuarioList = new ArrayList<>();
 
 }

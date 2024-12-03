@@ -1,12 +1,12 @@
 package br.gov.pa.iasep.opmepro_api.controller;
 
-import br.gov.pa.iasep.opmepro_api.model.dtos.AccreditedDTOs.ResponseAccreditedDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.RegularUserUpdateDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponseRegularUserDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponseRegularUserNoListDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponserRegularUserAndFeaturesDTO;
-import br.gov.pa.iasep.opmepro_api.services.RegularUserService;
+import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.CredenciadoResumidoDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs.UsuarioAtualizacaoDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs.UsuarioComFuncionalidadesDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs.UsuarioDetalhadoDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs.UsuarioResumidoDTO;
+import br.gov.pa.iasep.opmepro_api.services.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,39 +14,39 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/regular")
+@RequestMapping("/api/usuario")
 public class UsuarioController {
 
-    private final RegularUserService regularUserService;
+    private final UsuarioService usuarioService;
 
-    public UsuarioController(RegularUserService regularUserService) {
-        this.regularUserService = regularUserService;
+    public UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
     }
 
-    @GetMapping("/users")
-    public ResponseEntity<List<ResponseRegularUserDTO>> getAllRegularUsers(){
-        List<ResponseRegularUserDTO> response = regularUserService.getAllRegularUsers();
+    @GetMapping("/usuarios")
+    public ResponseEntity<List<UsuarioDetalhadoDTO>> getUsuarios(){
+        List<UsuarioDetalhadoDTO> response = usuarioService.getUsuarios();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("/users-features")
-    public ResponseEntity<List<ResponserRegularUserAndFeaturesDTO>> getAllRegularUsersAndFeatures(){
-        return ResponseEntity.status(HttpStatus.OK).body(regularUserService.getAllRegularUsersAndFeatures());
+    @GetMapping("/usuario-funcionalidades")
+    public ResponseEntity<List<UsuarioComFuncionalidadesDTO>> fetchUsuariosComFuncionalidades(){
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.fetchUsuariosComFuncionalidades());
     }
 
-    @GetMapping("/users-no-list")
-    public ResponseEntity<List<ResponseRegularUserNoListDTO>> getAllRegularUsersNoList(){
-        return ResponseEntity.status(HttpStatus.OK).body(regularUserService.getAllRegularUsersNoList());
+    @GetMapping("/usuario-basico")
+    public ResponseEntity<List<UsuarioResumidoDTO>> fetchUsuariosBasicos(){
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.fetchUsuariosBasicos());
     }
 
-    @GetMapping("/users-accredited")
-    public ResponseEntity<ResponseAccreditedDTO> getAccreditedFromUser(@RequestParam Integer code){
-        return ResponseEntity.status(HttpStatus.OK).body(regularUserService.getAccreditedFromUser(code));
+    @GetMapping("/usuario-credenciado")
+    public ResponseEntity<CredenciadoResumidoDTO> getCredenciadoDeUsuario(@RequestParam Integer code){
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.getCredenciadoDeUsuario(code));
     }
 
-    @PutMapping("/update-no-list")
-    public ResponseEntity<ApiResponse> updateRegularUser(@RequestBody RegularUserUpdateDTO updateDTO){
-        ApiResponse update = regularUserService.updateRegularUser(updateDTO);
+    @PutMapping("/atualizar-usuario")
+    public ResponseEntity<ApiResponse> atualizarUsuario(@RequestBody UsuarioAtualizacaoDTO updateDTO){
+        ApiResponse update = usuarioService.atualizarUsuario(updateDTO);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(update);
     }
 }

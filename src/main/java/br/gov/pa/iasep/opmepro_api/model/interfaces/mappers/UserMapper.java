@@ -1,10 +1,9 @@
 package br.gov.pa.iasep.opmepro_api.model.interfaces.mappers;
 
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserAgentDTOs.*;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.RegularUserCreateDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponseRegularUserDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponseRegularUserNoListDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsersDTOs.UserRegularDTOs.ResponserRegularUserAndFeaturesDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs.*;
+import br.gov.pa.iasep.opmepro_api.model.entities.Usuario;
+import br.gov.pa.iasep.opmepro_api.model.entities.UsuarioPerfil;
+import br.gov.pa.iasep.opmepro_api.model.entities.UsuarioSituacao;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -13,17 +12,21 @@ public interface UserMapper {
 
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    /// REGULAR_USER
-    RegularUser toEntityRegular(RegularUserCreateDTO regularUserDto);
+    ///Usuario
+    Usuario toEntity(UsuarioCadastroDTO usuarioCadastroDTO);
 
-    RegularUser toEntityRegularAccredited(RegularUserCreateDTO regularUserDto);
+    UsuarioCadastroDTO toRequestRegularDTO(Usuario usuario);
 
-    RegularUserCreateDTO toRequestRegularDTO(RegularUser regularUser);
+    UsuarioResumidoDTO toUsuarioDTO(Usuario usuario);
 
-    ResponseRegularUserDTO toRegularUserDTO(RegularUser regularUser);
+    UsuarioComFuncionalidadesDTO toUsuarioAndFuncionalidadesDTO(Usuario usuario);
 
-    ResponserRegularUserAndFeaturesDTO toRegularUserAndFeaturesDTO(RegularUser regularUser);
+    UsuarioDetalhadoDTO toUsuarioListasDTO(Usuario usuario);
 
-    ResponseRegularUserNoListDTO toRegularUserNoListDTO(RegularUser regularUser);
+    ///UsuarioSituacao
+    UsuarioSituacao toEntity(UsuarioSituacaoResumidoDTO usuarioSituacaoResumidoDTO);
+
+    //UsuarioPerfil
+    UsuarioPerfil toEntity(UsuarioPerfilResumidoDTO usuarioPerfilResumidoDTO);
 
 }

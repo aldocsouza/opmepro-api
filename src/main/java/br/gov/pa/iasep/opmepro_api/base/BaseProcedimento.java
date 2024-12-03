@@ -15,12 +15,12 @@ import lombok.Setter;
 public abstract class BaseProcedimento {
 
     @Column(name = "codigo", nullable = false)
-    private String codigo;
+    protected String codigo;
 
     @Column(name = "dsc_procedimento", nullable = false)
-    private String descricao;
+    protected String descricao;
 
     @Column(name = "valor", nullable = false)
-    private Double valor;
+    protected Double valor;
 
 }

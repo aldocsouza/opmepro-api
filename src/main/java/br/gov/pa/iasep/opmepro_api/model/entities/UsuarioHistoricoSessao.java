@@ -12,8 +12,6 @@ import java.time.LocalDateTime;
 @Table(name = "historico_sessao_usuario")
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class UsuarioHistoricoSessao {
 
     @Id
@@ -36,4 +34,20 @@ public class UsuarioHistoricoSessao {
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
+    public UsuarioHistoricoSessao(Integer id, LocalDateTime dataLogin, LocalDateTime dataLogout, String enderecoIp, LocalDateTime dataAlteracao, Usuario usuario) {
+        this.id = id;
+        this.dataLogin = dataLogin;
+        this.dataLogout = dataLogout;
+        this.enderecoIp = enderecoIp;
+        this.dataAlteracao = dataAlteracao;
+        this.usuario = usuario;
+    }
+
+    public UsuarioHistoricoSessao(LocalDateTime dataLogin, LocalDateTime dataLogout, String enderecoIp, LocalDateTime dataAlteracao, Usuario usuario) {
+        this.dataLogin = dataLogin;
+        this.dataLogout = dataLogout;
+        this.enderecoIp = enderecoIp;
+        this.dataAlteracao = dataAlteracao;
+        this.usuario = usuario;
+    }
 }

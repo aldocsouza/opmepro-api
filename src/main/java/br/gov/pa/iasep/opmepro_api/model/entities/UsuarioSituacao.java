@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "situacao_usuario")
 @Getter
@@ -20,5 +23,8 @@ public class UsuarioSituacao {
 
     @Column(name = "descricao", nullable = false)
     private String descricao;
+
+    @OneToMany(mappedBy = "situacaoUsuario")
+    private List<Usuario> usuarios = new ArrayList<>();
 
 }

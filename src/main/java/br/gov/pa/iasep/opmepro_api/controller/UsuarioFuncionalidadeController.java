@@ -1,9 +1,9 @@
 package br.gov.pa.iasep.opmepro_api.controller;
 
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
-import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.RequestRegularFeatureDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.FeaturesDTOs.UserPermissionsDTO;
-import br.gov.pa.iasep.opmepro_api.services.RegularFeatureService;
+import br.gov.pa.iasep.opmepro_api.model.dtos.FuncionalidadeDTOs.RequestUsuarioFuncionalidadeDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.FuncionalidadeDTOs.UsuarioPermissoesDTO;
+import br.gov.pa.iasep.opmepro_api.services.UsuarioFuncionalidadeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,25 +11,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/regular-features")
+@RequestMapping("/api/usuario-permissoes")
 public class UsuarioFuncionalidadeController {
 
-    private final RegularFeatureService regularFeatureService;
+    private final UsuarioFuncionalidadeService usuarioFuncionalidadeService;
 
-    public UsuarioFuncionalidadeController(RegularFeatureService regularFeatureService) {
-        this.regularFeatureService = regularFeatureService;
+    public UsuarioFuncionalidadeController(UsuarioFuncionalidadeService usuarioFuncionalidadeService) {
+        this.usuarioFuncionalidadeService = usuarioFuncionalidadeService;
     }
 
-    @GetMapping("/all-permissions")
-    public ResponseEntity<List<UserPermissionsDTO>> getAllPermissions(@RequestParam Integer code){
-        return ResponseEntity.status(HttpStatus.OK).body(regularFeatureService.getAllPermissions(code));
+    @GetMapping("/permissoes")
+    public ResponseEntity<List<UsuarioPermissoesDTO>> getPermissoes(@RequestParam Integer id){
+        return ResponseEntity.status(HttpStatus.OK).body(
+                usuarioFuncionalidadeService.getPermissoes(id)
+        );
     }
 
-    @PostMapping("/assign-feature")
-    public ResponseEntity<ApiResponse> assignFeature(@RequestBody RequestRegularFeatureDTO[] userFeature){
-        for (RequestRegularFeatureDTO feature : userFeature){
-            regularFeatureService.assignFeature(feature);
+    @PostMapping("/atribuir-permissao")
+    public ResponseEntity<ApiResponse> atribuirFuncionalidade(@RequestBody RequestUsuarioFuncionalidadeDTO[] userFeature){
+        for (RequestUsuarioFuncionalidadeDTO feature : userFeature){
+            usuarioFuncionalidadeService.atribuirFuncionalidade(feature);
         }
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ApiResponse("Cadastro realizado com sucesso!", true));
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(
+                new ApiResponse("Cadastro realizado com sucesso!", true)
+        );
     }
 }

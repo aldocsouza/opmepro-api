@@ -14,17 +14,17 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "auditagem")
-@IdClass(AuditagemId.class)
 public class Auditagem {
 
-    @Id
+    @EmbeddedId
+    private AuditagemId id;
+
     @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @JoinColumn(name = "id_usuario", insertable = false, updatable = false)
     private Usuario usuario;
 
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_solicitacao", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "id_solicitacao", insertable = false, updatable = false)
     private Solicitacao solicitacao;
 
     @Column(name = "data_auditagem", nullable = false)

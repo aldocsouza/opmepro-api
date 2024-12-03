@@ -1,5 +1,6 @@
 package br.gov.pa.iasep.opmepro_api.model.entities;
 
+import jakarta.persistence.Column;
 import lombok.*;
 
 import java.io.Serializable;
@@ -9,7 +10,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class AuditagemId implements Serializable {
 
+    @Column(name = "id_usuario")
     private Integer idUsuario;
-    private Integer idSolicitacao;
 
+    @Column(name = "id_solicitacao")
+    private Integer idSolicitacao;
 }

@@ -2,9 +2,7 @@ package br.gov.pa.iasep.opmepro_api.model.entities;
 
 import br.gov.pa.iasep.opmepro_api.base.BaseSolicitacao;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -15,8 +13,6 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "solicitacao")
-@AllArgsConstructor
-@NoArgsConstructor
 public class Solicitacao extends BaseSolicitacao {
 
     @Id
@@ -50,4 +46,14 @@ public class Solicitacao extends BaseSolicitacao {
     @OneToMany(mappedBy = "solicitacao")
     private List<SolicitacaoHistorico> solicitacaoHistoricoList = new ArrayList<>();
 
+    public Solicitacao(Integer id, String medico, String observacao, Boolean status, LocalDateTime dataSolicitacao, String numProcesso, String termoAdesao, String grauParentesco, Credenciado credenciado, Usuario usuario, Segurado segurado, List<Auditagem> auditagemList, List<DocumentoHash> documentoHashList, List<CodificacaoMaterial> codificacaoMaterialList, List<CodificacaoProcedimento> codificacaoProcedimentoList, List<SolicitacaoHistorico> solicitacaoHistoricoList) {
+        super(medico, observacao, status, dataSolicitacao, numProcesso, termoAdesao, grauParentesco);
+        this.id = id;
+        this.credenciado = credenciado;
+        this.usuario = usuario;
+        this.segurado = segurado;
+    }
+
+    public Solicitacao() {
+    }
 }

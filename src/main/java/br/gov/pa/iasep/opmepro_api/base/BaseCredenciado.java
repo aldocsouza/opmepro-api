@@ -18,21 +18,21 @@ import lombok.Setter;
 public abstract class BaseCredenciado {
 
     @Column(name = "matricula", nullable = false, length = 45)
-    private String matricula;
+    protected String matricula;
 
     @Column(name = "razao_social", nullable = false, length = 120)
-    private String razaoSocial;
+    protected String razaoSocial;
 
     @Column(name = "nome_fantasia", nullable = false, length = 120)
-    private String nomeFantasia;
+    protected String nomeFantasia;
 
     @Column(name = "cnpj", nullable = false, length = 18)
-    private String cnpj;
+    protected String cnpj;
 
     @Column(name = "num_contrato", nullable = false, length = 45)
-    private String numContrato;
+    protected String numContrato;
 
     @Column(name = "apelido", length = 50)
-    private String apelido;
+    protected String apelido;
 
 }

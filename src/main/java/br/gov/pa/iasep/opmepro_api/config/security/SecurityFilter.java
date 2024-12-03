@@ -1,6 +1,6 @@
 package br.gov.pa.iasep.opmepro_api.config.security;
 
-import br.gov.pa.iasep.opmepro_api.repositories.UserRepository;
+import br.gov.pa.iasep.opmepro_api.repositories.UsuarioRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,17 +21,14 @@ public class SecurityFilter extends OncePerRequestFilter {
     TokenService tokenService;
 
     @Autowired
-    AgentUserRepository agentUserRepository;
-
-    @Autowired
-    UserRepository userRepository;
+    UsuarioRepository usuarioRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var token = this.recoverToken(request);
         if(token != null){
             var username = tokenService.validateToken(token);
-            UserDetails user = findUserByUsername(username);
+            UserDetails user = usuarioRepository.findByUsername(username);
 
             if (user != null) {
                 var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
@@ -45,17 +42,5 @@ public class SecurityFilter extends OncePerRequestFilter {
         var authHeader = request.getHeader("Authorization");
         if (authHeader == null) return null;
         return authHeader.replace("Bearer ", "");
-    }
-
-    private UserDetails findUserByUsername(String username) {
-        // Tenta encontrar um AgentUser
-        UserDetails user = agentUserRepository.findByUsername(username);
-
-        // Se não encontrou, tenta encontrar um RegularUser
-        if (user == null) {
-            user = userRepository.findByUsername(username);
-        }
-
-        return user; // Retorna o usuário encontrado ou null
     }
 }

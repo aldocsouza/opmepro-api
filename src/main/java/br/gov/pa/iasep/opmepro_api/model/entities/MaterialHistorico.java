@@ -30,4 +30,5 @@ public class MaterialHistorico extends BaseMaterial {
     @ManyToOne
     @JoinColumn(name = "id_material_opme", nullable = false)
     private Material material;
+
 }
