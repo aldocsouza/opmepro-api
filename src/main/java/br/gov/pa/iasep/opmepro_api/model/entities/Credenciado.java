@@ -2,20 +2,16 @@ package br.gov.pa.iasep.opmepro_api.model.entities;
 
 import br.gov.pa.iasep.opmepro_api.base.BaseCredenciado;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "credenciados")
+@Table(name = "credenciado")
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Credenciado extends BaseCredenciado {
 
     @Id
@@ -26,12 +22,29 @@ public class Credenciado extends BaseCredenciado {
     @JoinColumn(name = "id_tipo", nullable = false)
     private CredenciadoTipo tipoCredenciado;
 
-    @OneToMany(mappedBy = "credenciado", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "credenciado")
     private List<Usuario> usuarios = new ArrayList<>();
 
-    @OneToMany(mappedBy = "credenciado", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "credenciado")
     private List<CredenciadoHistorico> credenciadoHistoricoList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "credenciado", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "credenciado")
     private List<Solicitacao> solicitacaoList = new ArrayList<>();
+
+
+    public Credenciado(String matricula, String razaoSocial, String nomeFantasia, String cnpj, String cpf, String numContrato, Boolean status, String apelido, Integer id, CredenciadoTipo tipoCredenciado) {
+        super(matricula, razaoSocial, nomeFantasia, cnpj, cpf, numContrato, status, apelido);
+        this.id = id;
+        this.tipoCredenciado = tipoCredenciado;
+    }
+
+    public Credenciado(String matricula, String razaoSocial, String nomeFantasia, String cnpj, String cpf, String numContrato, Boolean status, String apelido, CredenciadoTipo tipoCredenciado) {
+        super(matricula, razaoSocial, nomeFantasia, cnpj, cpf, numContrato, status, apelido);
+        this.tipoCredenciado = tipoCredenciado;
+    }
+
+
+
+    public Credenciado() {
+    }
 }

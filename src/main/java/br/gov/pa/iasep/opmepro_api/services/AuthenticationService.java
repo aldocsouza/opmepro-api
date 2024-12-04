@@ -54,14 +54,13 @@ public class AuthenticationService {
                 userDto.situacao(),
                 userMapper.toEntity(userDto).getCredenciado(),
                 userMapper.toEntity(userDto.perfil()),
-                userMapper.toEntity(userDto.usuarioSituacao())
+                userMapper.toEntity(userDto.situacaoUsuario())
         );
 
         usuarioRepository.save(regularUser);
 
         return new ApiResponse("Usuário cadastrado com sucesso!", true);
     }
-
 
     public LoginResponseDTO login(LoginRequestDTO loginRequestDTO, HttpServletRequest request){
         var usuario = (Usuario) usuarioRepository.findByUsername(loginRequestDTO.username());

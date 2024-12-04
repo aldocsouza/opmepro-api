@@ -15,7 +15,7 @@ public abstract class BaseSegurado {
     @Column(name = "ind_sexo")
     protected String sexo;
 
-    @Column(name = "ind_status")
+    @Column(name = "ind_status", nullable = false)
     protected Boolean status;
 
     @Column(name = "nom_situacao", nullable = false)

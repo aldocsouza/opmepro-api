@@ -54,6 +54,13 @@ public class Solicitacao extends BaseSolicitacao {
         this.segurado = segurado;
     }
 
+    public Solicitacao(String medico, String observacao, Boolean status, LocalDateTime dataSolicitacao, String numProcesso, String termoAdesao, String grauParentesco, Credenciado credenciado, Usuario usuario, Segurado segurado) {
+        super(medico, observacao, status, dataSolicitacao, numProcesso, termoAdesao, grauParentesco);
+        this.credenciado = credenciado;
+        this.usuario = usuario;
+        this.segurado = segurado;
+    }
+
     public Solicitacao() {
     }
 }

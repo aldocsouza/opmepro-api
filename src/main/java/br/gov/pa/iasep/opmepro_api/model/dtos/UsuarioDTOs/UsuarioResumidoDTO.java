@@ -23,6 +23,6 @@ public record UsuarioResumidoDTO(
 
         UsuarioPerfilResumidoDTO perfil,
 
-        UsuarioSituacaoResumidoDTO usuarioSituacao
+        UsuarioSituacaoResumidoDTO situacaoUsuario
 ) {
 }

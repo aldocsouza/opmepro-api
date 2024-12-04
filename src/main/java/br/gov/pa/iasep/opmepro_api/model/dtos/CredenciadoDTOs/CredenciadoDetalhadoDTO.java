@@ -17,7 +17,11 @@ public record CredenciadoDetalhadoDTO(
 
         String cnpj,
 
+        String cpf,
+
         String numContrato,
+
+        Boolean status,
 
         String apelido,
 

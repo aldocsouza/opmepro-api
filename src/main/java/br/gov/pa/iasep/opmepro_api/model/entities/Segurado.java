@@ -21,7 +21,7 @@ public class Segurado extends BaseSegurado {
     @OneToMany(mappedBy = "segurado")
     private List<Solicitacao> solicitacaoList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "segurado", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "segurado")
     private List<SeguradoHistorico> seguradoHistoricoList = new ArrayList<>();
 
     public Segurado(String nomeSegurado, String cpf, String sexo, Boolean status, String situacao, String municipio, String uf, Integer id, List<Solicitacao> solicitacaoList, List<SeguradoHistorico> seguradoHistoricoList) {

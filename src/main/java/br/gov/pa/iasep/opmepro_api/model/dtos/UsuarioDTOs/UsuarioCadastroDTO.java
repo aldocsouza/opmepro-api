@@ -34,6 +34,6 @@ public record UsuarioCadastroDTO(
         UsuarioPerfilResumidoDTO perfil,
 
         @NotNull
-        UsuarioSituacaoResumidoDTO usuarioSituacao
+        UsuarioSituacaoResumidoDTO situacaoUsuario
 ) {
 }

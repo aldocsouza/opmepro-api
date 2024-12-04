@@ -1,11 +1,8 @@
 package br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs;
 
 import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.CredenciadoResumidoDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.FuncionalidadeDTOs.UsuarioFuncionalidadeDTO;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-
-import java.util.List;
 
 public record UsuarioAtualizacaoDTO(
         @NotNull
@@ -33,14 +30,17 @@ public record UsuarioAtualizacaoDTO(
         Boolean situacao,
 
         @NotNull
+        Integer usuarioAlteracao,
+
+        @NotNull
         CredenciadoResumidoDTO credenciado,
 
         @NotNull
         UsuarioPerfilResumidoDTO perfil,
 
         @NotNull
-        UsuarioSituacaoResumidoDTO usuarioSituacao,
+        UsuarioSituacaoResumidoDTO situacaoUsuario
 
-        List<UsuarioFuncionalidadeDTO> usuarioFuncionalidadeList
+        //List<UsuarioFuncionalidadeDTO> usuarioFuncionalidadeList
 ) {
 }

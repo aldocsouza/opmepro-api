@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/usuario-permissoes")
+@RequestMapping("/api/usuario-funcionalidades")
 public class UsuarioFuncionalidadeController {
 
     private final UsuarioFuncionalidadeService usuarioFuncionalidadeService;
@@ -20,17 +20,17 @@ public class UsuarioFuncionalidadeController {
         this.usuarioFuncionalidadeService = usuarioFuncionalidadeService;
     }
 
-    @GetMapping("/permissoes")
+    @GetMapping("/funcionalidades-usuario")
     public ResponseEntity<List<UsuarioPermissoesDTO>> getPermissoes(@RequestParam Integer id){
         return ResponseEntity.status(HttpStatus.OK).body(
                 usuarioFuncionalidadeService.getPermissoes(id)
         );
     }
 
-    @PostMapping("/atribuir-permissao")
-    public ResponseEntity<ApiResponse> atribuirFuncionalidade(@RequestBody RequestUsuarioFuncionalidadeDTO[] userFeature){
-        for (RequestUsuarioFuncionalidadeDTO feature : userFeature){
-            usuarioFuncionalidadeService.atribuirFuncionalidade(feature);
+    @PostMapping("/atribuir-funcionalidades")
+    public ResponseEntity<ApiResponse> atribuirFuncionalidade(@RequestBody RequestUsuarioFuncionalidadeDTO[] usuarioFuncionalidade){
+        for (RequestUsuarioFuncionalidadeDTO funcionalidade : usuarioFuncionalidade){
+            usuarioFuncionalidadeService.atribuirFuncionalidade(funcionalidade);
         }
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(

@@ -1,11 +1,11 @@
 package br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs;
 
 import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.CredenciadoResumidoDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.FuncionalidadeDTOs.UsuarioFuncionalidadeDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.HistoricoDTOs.UsuarioHistoricoDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.HistoricoDTOs.UsuarioHistoricoSessaoDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.SolicitacaoDTOs.AuditagemDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.SolicitacaoDTOs.SolicitacaoResumidoDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.FuncionalidadeDTOs.UsuarioFuncionalidadeResponseUsuarioDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.HistoricoDTOs.UsuarioHistoricoResumidoDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.HistoricoDTOs.UsuarioHistoricoSessaoResumidoDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.SolicitacaoDTOs.AuditagemResponseUsuarioDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.SolicitacaoDTOs.SolicitacaoResponseUsuarioDTO;
 
 import java.util.List;
 
@@ -31,16 +31,16 @@ public record UsuarioDetalhadoDTO(
 
         UsuarioPerfilResumidoDTO perfil,
 
-        UsuarioSituacaoResumidoDTO usuarioSituacao,
+        UsuarioSituacaoResumidoDTO situacaoUsuario,
 
-        List<UsuarioFuncionalidadeDTO> usuarioFuncionalidadeList,
+        List<UsuarioFuncionalidadeResponseUsuarioDTO> usuarioFuncionalidadeList,
 
-        List<UsuarioHistoricoSessaoDTO> usuarioHistoricoSessaoList,
+        List<UsuarioHistoricoSessaoResumidoDTO> usuarioHistoricoSessaoList,
 
-        List<UsuarioHistoricoDTO> usuarioHistoricoList,
+        List<UsuarioHistoricoResumidoDTO> usuarioHistoricoList,
 
-        List<SolicitacaoResumidoDTO> solicitacaoList,
+        List<SolicitacaoResponseUsuarioDTO> solicitacaoList,
 
-        List<AuditagemDTO> auditagemList
+        List<AuditagemResponseUsuarioDTO> auditagemList
 ) {
 }

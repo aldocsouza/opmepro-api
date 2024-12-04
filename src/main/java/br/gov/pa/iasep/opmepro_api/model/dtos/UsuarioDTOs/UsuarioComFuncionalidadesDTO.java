@@ -1,7 +1,7 @@
 package br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs;
 
 import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.CredenciadoResumidoDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.FuncionalidadeDTOs.UsuarioFuncionalidadeDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.FuncionalidadeDTOs.UsuarioFuncionalidadeResponseUsuarioDTO;
 
 import java.util.List;
 
@@ -26,8 +26,8 @@ public record UsuarioComFuncionalidadesDTO(
 
         UsuarioPerfilResumidoDTO perfil,
 
-        UsuarioSituacaoResumidoDTO usuarioSituacao,
+        UsuarioSituacaoResumidoDTO situacaoUsuario,
 
-        List<UsuarioFuncionalidadeDTO> usuarioFuncionalidadeList
+        List<UsuarioFuncionalidadeResponseUsuarioDTO> usuarioFuncionalidadeList
 ) {
 }

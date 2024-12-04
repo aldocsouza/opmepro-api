@@ -24,22 +24,18 @@ public class HistoricoSessaoService {
     }
 
     public void iniciarSessao(Usuario usuario, String ipClient){
-        UsuarioHistoricoSessao historyRegularUser = new UsuarioHistoricoSessao(
+        UsuarioHistoricoSessao historicoUsuario = new UsuarioHistoricoSessao(
                 LocalDateTime.now(),
                 null,
                 ipClient,
-                null,
                 usuario
         );
-        historicoSessaoRepository.save(historyRegularUser);
+        historicoSessaoRepository.save(historicoUsuario);
     }
 
-    public void registrarLogout(String logoutDate, Integer code){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-        ZonedDateTime utcDateTime = ZonedDateTime.parse(logoutDate, formatter);
-        LocalDateTime logout = utcDateTime.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
-
-        Usuario usuario = usuarioRepository.findById(code)
+    public void registrarLogout(Integer id){
+        LocalDateTime logout = LocalDateTime.now();
+        Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
         UsuarioHistoricoSessao usuarioHistoricoSessao = historicoSessaoRepository.findTopByUsuarioOrderByDataLoginDesc(usuario);

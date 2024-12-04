@@ -5,5 +5,4 @@ public enum UserRole {
     MEDICO,
     USER_AGENT,
     USER_REGULAR;
-
 }

@@ -37,7 +37,7 @@ public record SolicitacaoDetalhadaDTO(
 
         SeguradoDTO segurado,
 
-        List<AuditagemDTO> auditagemList,
+        List<AuditagemResponseUsuarioDTO> auditagemList,
 
         List<DocumentoHashResumidoDTO> documentoHashList,
 

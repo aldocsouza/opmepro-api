@@ -40,8 +40,8 @@ public class UsuarioController {
     }
 
     @GetMapping("/usuario-credenciado")
-    public ResponseEntity<CredenciadoResumidoDTO> getCredenciadoDeUsuario(@RequestParam Integer code){
-        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.getCredenciadoDeUsuario(code));
+    public ResponseEntity<CredenciadoResumidoDTO> getCredenciadoDeUsuario(@RequestParam Integer id){
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.getCredenciadoDeUsuario(id));
     }
 
     @PutMapping("/atualizar-usuario")

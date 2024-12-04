@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
 
-public record UsuarioHistoricoDTO (
+public record UsuarioHistoricoDetalhadoDTO(
         Integer id,
 
         String nome,

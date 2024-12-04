@@ -57,4 +57,7 @@ public class UsuarioHistorico extends BaseUsuario {
         this.credenciado = credenciado;
         this.usuario = usuario;
     }
+
+    public UsuarioHistorico() {
+    }
 }

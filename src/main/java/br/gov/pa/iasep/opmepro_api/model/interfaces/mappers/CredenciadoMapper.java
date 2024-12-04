@@ -3,7 +3,9 @@ package br.gov.pa.iasep.opmepro_api.model.interfaces.mappers;
 import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.CredenciadoCadastroDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.CredenciadoFetchUsuariosDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.CredenciadoResumidoDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.CredenciadoTipoDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.Credenciado;
+import br.gov.pa.iasep.opmepro_api.model.entities.CredenciadoTipo;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -19,5 +21,7 @@ public interface CredenciadoMapper {
     Credenciado toEntity(CredenciadoResumidoDTO credenciadoResumidoDTO);
 
     Credenciado toEntity(CredenciadoCadastroDTO credenciadoCadastroDTO);
+
+    CredenciadoTipo toEntity(CredenciadoTipoDTO credenciadoTipoDTO);
 
 }
