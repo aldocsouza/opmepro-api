@@ -21,8 +21,8 @@ public class UsuarioFuncionalidadeController {
     }
 
     @GetMapping("/{id}/funcionalidades")
-    public ResponseEntity<List<UsuarioFuncionalidadeResponseUsuarioDTO>> obterFuncionalidades(@PathVariable("id") Integer id){
-        return ResponseEntity.status(HttpStatus.OK).body(usuarioFuncionalidadeService.getPermissoes(id));
+    public ResponseEntity<List<UsuarioFuncionalidadeResponseUsuarioDTO>> obterFuncionalidadesUsuario(@PathVariable("id") Integer id){
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioFuncionalidadeService.obterFuncionalidadesUsuario(id));
     }
 
     @PostMapping("/atribuir")

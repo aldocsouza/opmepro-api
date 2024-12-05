@@ -39,12 +39,14 @@ public class UsuarioFuncionalidadeService {
         this.usuarioFuncionalidadeMapper = usuarioFuncionalidadeMapper;
     }
 
-    public List<UsuarioFuncionalidadeResponseUsuarioDTO> getPermissoes(Integer id){
+    public List<UsuarioFuncionalidadeResponseUsuarioDTO> obterFuncionalidadesUsuario(Integer id){
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
-        return usuarioFuncionalidadeRepository.findByUsuario(usuario)
-                .stream()
+        List<UsuarioFuncionalidade> funcionalidades = usuarioFuncionalidadeRepository.findByUsuario(usuario)
+                .orElse(null);
+
+        return funcionalidades.stream()
                 .map(usuarioFuncionalidadeMapper::toUsuarioFuncionalidadeResponseUsuarioDTO)
                 .collect(Collectors.toList());
     }

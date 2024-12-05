@@ -1,5 +1,7 @@
 package br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs;
 
+import br.gov.pa.iasep.opmepro_api.model.dtos.HistoricoDTOs.CredenciadoHistoricoResumidoDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.SolicitacaoDTOs.SolicitacaoResumidoDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs.UsuarioResumidoDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.CredenciadoHistorico;
 import br.gov.pa.iasep.opmepro_api.model.entities.Solicitacao;
@@ -29,8 +31,8 @@ public record CredenciadoDetalhadoDTO(
 
         List<UsuarioResumidoDTO> usuarios,
 
-        List<CredenciadoHistorico> credenciadoHistoricoList,
+        List<CredenciadoHistoricoResumidoDTO> credenciadoHistoricoList,
 
-        List<Solicitacao> solicitacaoList
+        List<SolicitacaoResumidoDTO> solicitacaoList
 ) {
 }

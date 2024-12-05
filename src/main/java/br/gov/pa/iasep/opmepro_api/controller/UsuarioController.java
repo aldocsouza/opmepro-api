@@ -3,7 +3,6 @@ package br.gov.pa.iasep.opmepro_api.controller;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.CredenciadoResumidoDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs.UsuarioAtualizacaoDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs.UsuarioComFuncionalidadesDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs.UsuarioDetalhadoDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs.UsuarioResumidoDTO;
 import br.gov.pa.iasep.opmepro_api.services.UsuarioService;
