@@ -7,6 +7,5 @@ public record CodificacaoMaterialComMaterialDTO(
         Integer qtdSolicitado,
 
         Integer qtdAutorizado
-
 ) {
 }
