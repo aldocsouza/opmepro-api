@@ -2,8 +2,9 @@ package br.gov.pa.iasep.opmepro_api.services;
 
 import br.gov.pa.iasep.opmepro_api.exceptions.FeatureNotFoundException;
 import br.gov.pa.iasep.opmepro_api.exceptions.NotFoundException;
+import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.dtos.FuncionalidadeDTOs.RequestUsuarioFuncionalidadeDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.FuncionalidadeDTOs.UsuarioPermissoesDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.FuncionalidadeDTOs.UsuarioFuncionalidadeResponseUsuarioDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.Funcionalidade;
 import br.gov.pa.iasep.opmepro_api.model.entities.Usuario;
 import br.gov.pa.iasep.opmepro_api.model.entities.UsuarioFuncionalidade;
@@ -38,37 +39,41 @@ public class UsuarioFuncionalidadeService {
         this.usuarioFuncionalidadeMapper = usuarioFuncionalidadeMapper;
     }
 
-    public List<UsuarioPermissoesDTO> getPermissoes(Integer id){
+    public List<UsuarioFuncionalidadeResponseUsuarioDTO> getPermissoes(Integer id){
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
         return usuarioFuncionalidadeRepository.findByUsuario(usuario)
                 .stream()
-                .map(usuarioFuncionalidadeMapper::toUsuarioPermissoesDTO)
+                .map(usuarioFuncionalidadeMapper::toUsuarioFuncionalidadeResponseUsuarioDTO)
                 .collect(Collectors.toList());
     }
 
-    public void atribuirFuncionalidade(RequestUsuarioFuncionalidadeDTO usuarioFuncionalidade){
+    public ApiResponse atribuirFuncionalidade(List<RequestUsuarioFuncionalidadeDTO> usuarioFuncionalidade){
+        for (RequestUsuarioFuncionalidadeDTO funcionalidadeRequest : usuarioFuncionalidade){
 
-        Funcionalidade funcionalidade = funcionalidadeRepository.findById(usuarioFuncionalidade.idFuncionalidade())
-                .orElseThrow(() -> new FeatureNotFoundException("Funcionalidade não encontrada!"));
+            Funcionalidade funcionalidade = funcionalidadeRepository.findById(funcionalidadeRequest.idFuncionalidade())
+                    .orElseThrow(() -> new FeatureNotFoundException("Funcionalidade não encontrada!"));
 
-        Usuario usuario = usuarioRepository.findById(usuarioFuncionalidade.idUsuario())
-                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+            Usuario usuario = usuarioRepository.findById(funcionalidadeRequest.idUsuario())
+                    .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
-        UsuarioFuncionalidadeId id = new UsuarioFuncionalidadeId(
-                usuario.getId(),
-                funcionalidade.getId()
-        );
+            UsuarioFuncionalidadeId id = new UsuarioFuncionalidadeId(
+                    usuario.getId(),
+                    funcionalidade.getId()
+            );
 
-        UsuarioFuncionalidade usuarioFunc = new UsuarioFuncionalidade();
-        usuarioFunc.setId(id);
-        usuarioFunc.setFuncionalidade(funcionalidade);
-        usuarioFunc.setUsuario(usuario);
-        usuarioFunc.setLeitura(usuarioFuncionalidade.leitura());
-        usuarioFunc.setEscrita(usuarioFuncionalidade.escrita());
+            UsuarioFuncionalidade usuarioFunc = new UsuarioFuncionalidade();
+            usuarioFunc.setId(id);
+            usuarioFunc.setFuncionalidade(funcionalidade);
+            usuarioFunc.setUsuario(usuario);
+            usuarioFunc.setLeitura(funcionalidadeRequest.leitura());
+            usuarioFunc.setEscrita(funcionalidadeRequest.escrita());
 
-        usuarioFuncionalidadeRepository.save(usuarioFunc);
+            usuarioFuncionalidadeRepository.save(usuarioFunc);
+        }
+
+        return new ApiResponse("Cadastro realizado com sucesso!", true);
     }
 
 }

@@ -30,14 +30,15 @@ public class AuthenticationController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(auth);
     }
 
-    @PostMapping("/cadastrar-usuario")
+    @PostMapping("/cadastrar")
     public ResponseEntity<ApiResponse> cadastrarUsuario(@RequestBody @Valid UsuarioCadastroDTO usuario){
         ApiResponse register = authenticationService.cadastrarUsuario(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(register);
     }
 
-    @PutMapping("/logout")
-    public void registrarLogout(@RequestParam Integer id){
+    @PutMapping("/logout/{id}")
+    public ResponseEntity<Void> registrarLogout(@PathVariable Integer id){
         historicoSessaoService.registrarLogout(id);
+        return ResponseEntity.noContent().build();
     }
 }

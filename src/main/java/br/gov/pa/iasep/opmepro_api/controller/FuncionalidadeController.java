@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/funcionalidade")
+@RequestMapping("/api/funcionalidades")
 public class FuncionalidadeController {
 
     private final FuncionalidadeService funcionalidadeService;
@@ -21,25 +21,25 @@ public class FuncionalidadeController {
         this.funcionalidadeService = funcionalidadeService;
     }
 
-    @GetMapping("/funcionalidades")
-    public ResponseEntity<List<FuncionalidadeResumidoDTO>> getFuncionalidades(){
-        return ResponseEntity.status(HttpStatus.OK).body(funcionalidadeService.getFuncionalidades());
+    @GetMapping("/resumidos")
+    public ResponseEntity<List<FuncionalidadeResumidoDTO>> obterFuncionalidadesResumidos(){
+        return ResponseEntity.status(HttpStatus.OK).body(funcionalidadeService.obterFuncionalidadesResumidos());
     }
 
-    @GetMapping("/funcionalidade-usuarios")
-    public ResponseEntity<FuncionalidadeDetalhadoDTO> getFuncionalidadeComUsuarios(@RequestParam Integer id){
-        return ResponseEntity.status(HttpStatus.OK).body(funcionalidadeService.getFuncionalidadeComUsuarios(id));
+    @GetMapping("/detalhado/{id}")
+    public ResponseEntity<FuncionalidadeDetalhadoDTO> obterFuncionalidadeDetalhada(@PathVariable("id") Integer id){
+        return ResponseEntity.status(HttpStatus.OK).body(funcionalidadeService.obterFuncionalidadeDetalhada(id));
     }
 
-    @PostMapping("/cadastrar-funcionalidade")
+    @PostMapping("/cadastrar")
     public ResponseEntity<ApiResponse> cadastrarFuncionalidade(@RequestBody FuncionalidadeCadastroDTO funcionalidadeDTO){
         ApiResponse response = funcionalidadeService.cadastrarFuncionalidade(funcionalidadeDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @PutMapping("/atualizar-funcionalidade")
-    public ResponseEntity<ApiResponse> atualizarFuncionalidade(@RequestBody FuncionalidadeResumidoDTO funcionalidadeDTO){
-        ApiResponse response = funcionalidadeService.atualizarFuncionalidade(funcionalidadeDTO);
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse> atualizarFuncionalidade(@PathVariable("id") Integer id, @RequestBody FuncionalidadeResumidoDTO funcionalidadeDTO){
+        ApiResponse response = funcionalidadeService.atualizarFuncionalidade(id, funcionalidadeDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

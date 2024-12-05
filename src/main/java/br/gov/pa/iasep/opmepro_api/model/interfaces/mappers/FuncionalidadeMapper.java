@@ -1,7 +1,7 @@
 package br.gov.pa.iasep.opmepro_api.model.interfaces.mappers;
 
 import br.gov.pa.iasep.opmepro_api.model.dtos.FuncionalidadeDTOs.FuncionalidadeDetalhadoDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.FuncionalidadeDTOs.UsuarioPermissoesDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.FuncionalidadeDTOs.UsuarioFuncionalidadeResponseUsuarioDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.Funcionalidade;
 import br.gov.pa.iasep.opmepro_api.model.entities.UsuarioFuncionalidade;
 import org.mapstruct.Mapper;
@@ -12,7 +12,7 @@ public interface FuncionalidadeMapper {
 
     FuncionalidadeMapper INSTANCE = Mappers.getMapper(FuncionalidadeMapper.class);
 
-    UsuarioPermissoesDTO toUsuarioPermissoesDTO(UsuarioFuncionalidade usuarioFuncionalidade);
+    UsuarioFuncionalidadeResponseUsuarioDTO toUsuarioFuncionalidadeResponseUsuarioDTO(UsuarioFuncionalidade usuarioFuncionalidade);
     FuncionalidadeDetalhadoDTO toFuncionalidadeDetalhadoDTO(Funcionalidade funcionalidade);
 
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/usuario")
+@RequestMapping("/api/usuarios")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -23,30 +23,25 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping("/usuarios")
-    public ResponseEntity<List<UsuarioDetalhadoDTO>> getUsuarios(){
-        List<UsuarioDetalhadoDTO> response = usuarioService.getUsuarios();
+    @GetMapping("/resumidos")
+    public ResponseEntity<List<UsuarioResumidoDTO>> obterUsuariosResumidos(){
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.obterUsuariosResumidos());
+    }
+
+    @GetMapping("/detalhado/{id}")
+    public ResponseEntity<UsuarioDetalhadoDTO> obterUsuarioDetalhado(@PathVariable("id") Integer id){
+        UsuarioDetalhadoDTO response = usuarioService.obterUsuarioDetalhado(id);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("/usuario-funcionalidades")
-    public ResponseEntity<List<UsuarioComFuncionalidadesDTO>> fetchUsuariosComFuncionalidades(){
-        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.fetchUsuariosComFuncionalidades());
+    @GetMapping("/{id}/credenciado")
+    public ResponseEntity<CredenciadoResumidoDTO> obterCredenciadoDeUsuario(@PathVariable("id") Integer id){
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.obterCredenciadoDeUsuario(id));
     }
 
-    @GetMapping("/usuario-basico")
-    public ResponseEntity<List<UsuarioResumidoDTO>> fetchUsuariosBasicos(){
-        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.fetchUsuariosBasicos());
-    }
-
-    @GetMapping("/usuario-credenciado")
-    public ResponseEntity<CredenciadoResumidoDTO> getCredenciadoDeUsuario(@RequestParam Integer id){
-        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.getCredenciadoDeUsuario(id));
-    }
-
-    @PutMapping("/atualizar-usuario")
-    public ResponseEntity<ApiResponse> atualizarUsuario(@RequestBody UsuarioAtualizacaoDTO updateDTO){
-        ApiResponse update = usuarioService.atualizarUsuario(updateDTO);
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse> atualizarUsuario(@PathVariable("id") Integer id, @RequestBody UsuarioAtualizacaoDTO updateDTO){
+        ApiResponse update = usuarioService.atualizarUsuario(id, updateDTO);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(update);
     }
 }

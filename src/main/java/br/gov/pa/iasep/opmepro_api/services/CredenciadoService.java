@@ -3,10 +3,7 @@ package br.gov.pa.iasep.opmepro_api.services;
 import br.gov.pa.iasep.opmepro_api.exceptions.AlreadyExistsException;
 import br.gov.pa.iasep.opmepro_api.exceptions.NotFoundException;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
-import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.CredenciadoAtualizarDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.CredenciadoCadastroDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.CredenciadoFetchUsuariosDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.CredenciadoResumidoDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.*;
 import br.gov.pa.iasep.opmepro_api.model.entities.Credenciado;
 import br.gov.pa.iasep.opmepro_api.model.entities.CredenciadoHistorico;
 import br.gov.pa.iasep.opmepro_api.model.interfaces.mappers.CredenciadoMapper;
@@ -36,24 +33,30 @@ public class CredenciadoService {
     public List<CredenciadoFetchUsuariosDTO> fetchCredenciadoComUsuarios(){
         return credenciadoRepository.findAll()
                 .stream()
-                .map(credenciadoMapper::toResponseUsersDTO)
+                .map(credenciadoMapper::toCredenciadoFetchUsuariosDTO)
                 .toList();
     }
 
-    public List<CredenciadoResumidoDTO> getCredenciados(){
+    public List<CredenciadoResumidoDTO> obterCredenciados(){
         return credenciadoRepository.findAll()
                 .stream()
-                .map(credenciadoMapper::toResponseDTO)
+                .map(credenciadoMapper::toCredenciadoResumidoDTO)
                 .toList();
     }
 
-    public ApiResponse postCredenciado(CredenciadoCadastroDTO credenciadoCadastroDTO){
+    public CredenciadoDetalhadoDTO obterCredenciadoDetalhado(Integer id){
+        Credenciado credenciado = credenciadoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Credenciado não encontrado"));
+        return credenciadoMapper.toCredenciadoDetalhadoDTO(credenciado);
+    }
+
+    public ApiResponse cadastrarCredenciado (CredenciadoCadastroDTO credenciadoCadastroDTO){
 
         if(credenciadoRepository.findByMatricula(credenciadoCadastroDTO.matricula()) != null)
             throw new AlreadyExistsException("Já existe um credenciado com a matrícula Nº " + credenciadoCadastroDTO.matricula() + " informada.");
 
         if(credenciadoRepository.findByNumContrato(credenciadoCadastroDTO.numContrato()) != null)
-            new AlreadyExistsException("Já existe um credenciado com o Nº de Contrato " + credenciadoCadastroDTO.numContrato() + " informado.");
+            throw new AlreadyExistsException("Já existe um credenciado com o Nº de Contrato " + credenciadoCadastroDTO.numContrato() + " informado.");
 
         if(credenciadoRepository.findByCnpj(credenciadoCadastroDTO.cnpj()) != null)
             throw new AlreadyExistsException("Já existe um credenciado com o CNPJ Nº " + credenciadoCadastroDTO.cnpj() + " informado.");
@@ -65,9 +68,9 @@ public class CredenciadoService {
         return new ApiResponse("Credenciado cadastrado com sucesso!", true);
     }
 
-    public ApiResponse atualizarCredenciado(CredenciadoAtualizarDTO credenciadoAtualizarDTO) {
+    public ApiResponse atualizarCredenciado(Integer id, CredenciadoAtualizarDTO credenciadoAtualizarDTO) {
 
-        Credenciado credenciado = credenciadoRepository.findById(credenciadoAtualizarDTO.id())
+        Credenciado credenciado = credenciadoRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Credenciado não encontrado!"));
 
         CredenciadoHistorico credenciadoHistorico = construirHistoricoCredenciado(credenciado, credenciadoAtualizarDTO);

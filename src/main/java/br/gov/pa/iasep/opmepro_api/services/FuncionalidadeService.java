@@ -23,14 +23,14 @@ public class FuncionalidadeService {
         this.funcionalidadeMapper = funcionalidadeMapper;
     }
 
-    public List<FuncionalidadeResumidoDTO> getFuncionalidades(){
+    public List<FuncionalidadeResumidoDTO> obterFuncionalidadesResumidos(){
         return funcionalidadeRepository.findAll()
                 .stream()
                 .map(feature -> new FuncionalidadeResumidoDTO(feature.getId(), feature.getDescricao()))
                 .toList();
     }
 
-    public FuncionalidadeDetalhadoDTO getFuncionalidadeComUsuarios(Integer id){
+    public FuncionalidadeDetalhadoDTO obterFuncionalidadeDetalhada(Integer id){
         Funcionalidade funcionalidade = funcionalidadeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Funcionalidade não encontrada!"));
 
@@ -45,8 +45,8 @@ public class FuncionalidadeService {
         return new ApiResponse("Cadastro realizado com sucesso!", true);
     }
 
-    public ApiResponse atualizarFuncionalidade(FuncionalidadeResumidoDTO funcionalidadeDTO) {
-        Funcionalidade funcionalidade = funcionalidadeRepository.findById(funcionalidadeDTO.id())
+    public ApiResponse atualizarFuncionalidade(Integer id, FuncionalidadeResumidoDTO funcionalidadeDTO) {
+        Funcionalidade funcionalidade = funcionalidadeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Funcionalidade não encontrada!"));
 
         funcionalidade.setDescricao(funcionalidadeDTO.descricao());

@@ -39,36 +39,35 @@ public class UsuarioService {
         this.validacoesService = validacoesService;
     }
 
-    public List<UsuarioDetalhadoDTO> getUsuarios(){
-        return usuarioRepository.findAll()
-                .stream()
-                .map(userMapper::toUsuarioListasDTO)
-                .toList();
+    public UsuarioDetalhadoDTO obterUsuarioDetalhado(Integer id){
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Usuário não encontrado!"));
+        return userMapper.toUsuarioDetalhadoDTO(usuario);
     }
 
-    public List<UsuarioComFuncionalidadesDTO> fetchUsuariosComFuncionalidades(){
-        return usuarioRepository.findAll()
-                .stream()
-                .map(userMapper::toUsuarioAndFuncionalidadesDTO)
-                .toList();
-    }
-
-    public List<UsuarioResumidoDTO> fetchUsuariosBasicos(){
+    public List<UsuarioResumidoDTO> obterUsuariosResumidos(){
         return usuarioRepository.findAll()
                 .stream()
                 .map(userMapper::toUsuarioDTO)
                 .toList();
     }
 
-    public CredenciadoResumidoDTO getCredenciadoDeUsuario(Integer id){
+    public List<UsuarioComFuncionalidadesDTO> getUsuariosComFuncionalidades(){
+        return usuarioRepository.findAll()
+                .stream()
+                .map(userMapper::toUsuarioAndFuncionalidadesDTO)
+                .toList();
+    }
+
+    public CredenciadoResumidoDTO obterCredenciadoDeUsuario(Integer id){
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado."));
 
-        return credenciadoMapper.toResponseDTO(usuario.getCredenciado());
+        return credenciadoMapper.toCredenciadoResumidoDTO(usuario.getCredenciado());
     }
 
-    public ApiResponse atualizarUsuario(UsuarioAtualizacaoDTO updateDTO){
-        Usuario usuario = usuarioRepository.findById(updateDTO.id())
+    public ApiResponse atualizarUsuario(Integer id, UsuarioAtualizacaoDTO updateDTO){
+        Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
         UsuarioHistorico usuarioHistorico = contruirHistoricoBackup(usuario, updateDTO);

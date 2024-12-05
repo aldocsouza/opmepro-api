@@ -21,7 +21,7 @@ public interface UserMapper {
 
     UsuarioComFuncionalidadesDTO toUsuarioAndFuncionalidadesDTO(Usuario usuario);
 
-    UsuarioDetalhadoDTO toUsuarioListasDTO(Usuario usuario);
+    UsuarioDetalhadoDTO toUsuarioDetalhadoDTO(Usuario usuario);
 
     ///UsuarioSituacao
     UsuarioSituacao toEntity(UsuarioSituacaoResumidoDTO usuarioSituacaoResumidoDTO);
