@@ -1,6 +1,6 @@
 package br.gov.pa.iasep.opmepro_api.model.dtos.SeguradoDTOs;
 
-public record SeguradoDTO(
+public record SeguradoResumidoDTO(
         Integer id,
         String nomeSegurado,
         String cpf,

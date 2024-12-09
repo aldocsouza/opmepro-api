@@ -15,7 +15,7 @@ public interface CredenciadoMapper {
 
     CredenciadoDetalhadoDTO toCredenciadoDetalhadoDTO(Credenciado credenciado);
 
-    CredenciadoFetchUsuariosDTO toCredenciadoFetchUsuariosDTO(Credenciado credenciado);
+    CredenciadoComUsuariosDTO toCredenciadoFetchUsuariosDTO(Credenciado credenciado);
 
     Credenciado toEntity(CredenciadoResumidoDTO credenciadoResumidoDTO);
 

@@ -25,11 +25,12 @@ public class TokenService {
             JWTCreator.Builder jwtBuilder = JWT.create()
                     .withIssuer("opmepro-api")
                     .withSubject(usuario.getUsername())
+                    .withClaim("id", usuario.getId())
                     .withClaim("nome", usuario.getNome())
                     .withClaim("cpf", usuario.getCpf())
                     .withClaim("telefone", usuario.getTelefone())
                     .withClaim("email", usuario.getEmail())
-                    .withClaim("role", usuario.getPerfil().toString())
+                    .withClaim("perfil", usuario.getPerfil().getDescricao())
                     .withClaim("situacao", usuario.getSituacao())
                     .withExpiresAt(generateExpirationDate());
 

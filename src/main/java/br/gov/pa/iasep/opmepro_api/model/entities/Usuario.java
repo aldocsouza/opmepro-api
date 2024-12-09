@@ -26,7 +26,7 @@ public class Usuario extends BaseUsuario implements UserDetails {
 
     // Relacionamentos Muitos pra Um
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_credenciado", nullable = false)
+    @JoinColumn(name = "id_credenciado")
     private Credenciado credenciado;
 
     @ManyToOne

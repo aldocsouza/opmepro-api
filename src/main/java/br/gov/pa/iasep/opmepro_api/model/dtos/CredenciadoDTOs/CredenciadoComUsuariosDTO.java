@@ -4,7 +4,7 @@ import br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs.UsuarioResumidoDTO;
 
 import java.util.List;
 
-public record CredenciadoFetchUsuariosDTO (
+public record CredenciadoComUsuariosDTO(
 
         Integer id,
 

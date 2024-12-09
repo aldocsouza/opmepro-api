@@ -11,7 +11,6 @@ public record DocumentoHashCadastroDTO(
         @NotNull @NotBlank
         String hashDocumento,
 
-        @NotNull
         LocalDateTime dataCriacao,
 
         @NotNull @NotBlank

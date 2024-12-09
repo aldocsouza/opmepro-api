@@ -24,6 +24,9 @@ public class UsuarioPerfil {
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
+    @Column(name = "tipo_usuario", nullable = false)
+    private Boolean tipoUsuario = false;
+
     @OneToMany(mappedBy = "perfil", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Usuario> usuarioList = new ArrayList<>();
 

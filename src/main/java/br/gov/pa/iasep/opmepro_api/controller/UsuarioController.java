@@ -2,9 +2,7 @@ package br.gov.pa.iasep.opmepro_api.controller;
 
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.CredenciadoResumidoDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs.UsuarioAtualizacaoDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs.UsuarioDetalhadoDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs.UsuarioResumidoDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs.*;
 import br.gov.pa.iasep.opmepro_api.services.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +34,16 @@ public class UsuarioController {
     @GetMapping("/{id}/credenciado")
     public ResponseEntity<CredenciadoResumidoDTO> obterCredenciadoDeUsuario(@PathVariable("id") Integer id){
         return ResponseEntity.status(HttpStatus.OK).body(usuarioService.obterCredenciadoDeUsuario(id));
+    }
+
+    @GetMapping("/perfis")
+    public ResponseEntity<List<UsuarioPerfilResumidoDTO>> obterPerfis(){
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.obterPerfis());
+    }
+
+    @GetMapping("/situacao-usuario")
+    public ResponseEntity<List<UsuarioSituacaoResumidoDTO>> obterSituacoesUsuario(){
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.obterSituacoesUsuario());
     }
 
     @PutMapping("/{id}")

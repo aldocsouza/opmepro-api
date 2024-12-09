@@ -1,12 +1,10 @@
-package br.gov.pa.iasep.opmepro_api.model.dtos.SolicitacaoDTOs;
+package br.gov.pa.iasep.opmepro_api.model.dtos.HistoricoDTOs;
 
-import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.CredenciadoResumidoDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.SeguradoDTOs.SeguradoResumidoDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
 
-public record SolicitacaoResponseUsuarioDTO(
+public record SolicitacaoHistoricoResumidoDTO(
         Integer id,
 
         String medico,
@@ -24,8 +22,13 @@ public record SolicitacaoResponseUsuarioDTO(
 
         String grauParentesco,
 
-        CredenciadoResumidoDTO credenciado,
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+        LocalDateTime dataAlteracao,
 
-        SeguradoResumidoDTO segurado
+        Integer usuarioAlteracao,
+
+        Integer idCredenciado,
+
+        Integer idSegurado
 ) {
 }

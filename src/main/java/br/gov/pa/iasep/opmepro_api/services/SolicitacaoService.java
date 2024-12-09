@@ -1,9 +1,11 @@
 package br.gov.pa.iasep.opmepro_api.services;
 
+import br.gov.pa.iasep.opmepro_api.exceptions.NotFoundException;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ApiResponse;
 import br.gov.pa.iasep.opmepro_api.model.dtos.MaterialDTO.CodificacaoMaterialComMaterialDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.ProcedimentoDTOs.CodificacaoProcedimentoComProcedimentoDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.SolicitacaoDTOs.SolicitacaoCadastroDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.SolicitacaoDTOs.SolicitacaoDetalhadaDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.SolicitacaoDTOs.SolicitacaoResumidoDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.*;
 import br.gov.pa.iasep.opmepro_api.model.interfaces.mappers.MaterialProcedimentoMapper;
@@ -45,6 +47,13 @@ public class SolicitacaoService {
                 .stream()
                 .map(solicitacaoMapper::toSolicitacaoResumidoDTO)
                 .toList();
+    }
+
+    public SolicitacaoDetalhadaDTO obterSolicitacaoDetalhada(Integer id){
+        Solicitacao solicitacao = solicitacaoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Solicitação não encontrada!."));
+
+        return solicitacaoMapper.toSolicitacaoDetalhadaDTO(solicitacao);
     }
 
     @Transactional

@@ -27,7 +27,6 @@ public record UsuarioCadastroDTO(
         @NotNull
         Boolean situacao,
 
-        @NotNull
         CredenciadoResumidoDTO credenciado,
 
         @NotNull

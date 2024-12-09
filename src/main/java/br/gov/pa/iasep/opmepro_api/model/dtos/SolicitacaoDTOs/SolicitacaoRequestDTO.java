@@ -1,7 +1,7 @@
 package br.gov.pa.iasep.opmepro_api.model.dtos.SolicitacaoDTOs;
 
 import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.CredenciadoResumidoDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.SeguradoDTOs.SeguradoDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.SeguradoDTOs.SeguradoResumidoDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs.UsuarioResumidoDTO;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -36,6 +36,6 @@ public record SolicitacaoRequestDTO(
         UsuarioResumidoDTO usuario,
 
         @NotNull
-        SeguradoDTO segurado
+        SeguradoResumidoDTO segurado
 ) {
 }

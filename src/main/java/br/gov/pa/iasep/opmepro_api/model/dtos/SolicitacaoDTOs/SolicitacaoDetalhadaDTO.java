@@ -2,8 +2,10 @@ package br.gov.pa.iasep.opmepro_api.model.dtos.SolicitacaoDTOs;
 
 import br.gov.pa.iasep.opmepro_api.model.dtos.CredenciadoDTOs.CredenciadoResumidoDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.DocumentoHashDTOs.DocumentoHashResumidoDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.HistoricoDTOs.SolicitacaoHistoricoResumidoDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.MaterialDTO.CodificacaoMaterialComMaterialDTO;
-import br.gov.pa.iasep.opmepro_api.model.dtos.SeguradoDTOs.SeguradoDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.ProcedimentoDTOs.CodificacaoProcedimentoComProcedimentoDTO;
+import br.gov.pa.iasep.opmepro_api.model.dtos.SeguradoDTOs.SeguradoResumidoDTO;
 import br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs.UsuarioResumidoDTO;
 import br.gov.pa.iasep.opmepro_api.model.entities.CodificacaoProcedimento;
 import br.gov.pa.iasep.opmepro_api.model.entities.SolicitacaoHistorico;
@@ -35,7 +37,7 @@ public record SolicitacaoDetalhadaDTO(
 
         UsuarioResumidoDTO usuario,
 
-        SeguradoDTO segurado,
+        SeguradoResumidoDTO segurado,
 
         List<AuditagemResponseUsuarioDTO> auditagemList,
 
@@ -43,8 +45,8 @@ public record SolicitacaoDetalhadaDTO(
 
         List<CodificacaoMaterialComMaterialDTO> codificacaoMaterialList,
 
-        List<CodificacaoProcedimento> codificacaoProcedimentoList,
+        List<CodificacaoProcedimentoComProcedimentoDTO> codificacaoProcedimentoList,
 
-        List<SolicitacaoHistorico> solicitacaoHistoricoList
+        List<SolicitacaoHistoricoResumidoDTO> solicitacaoHistoricoList
 ) {
 }

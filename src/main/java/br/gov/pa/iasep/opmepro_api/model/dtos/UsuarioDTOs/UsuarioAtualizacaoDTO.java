@@ -40,7 +40,5 @@ public record UsuarioAtualizacaoDTO(
 
         @NotNull
         UsuarioSituacaoResumidoDTO situacaoUsuario
-
-        //List<UsuarioFuncionalidadeDTO> usuarioFuncionalidadeList
 ) {
 }

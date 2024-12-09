@@ -30,7 +30,7 @@ public class CredenciadoService {
         this.validacoesService = validacoesService;
     }
 
-    public List<CredenciadoFetchUsuariosDTO> fetchCredenciadoComUsuarios(){
+    public List<CredenciadoComUsuariosDTO> fetchCredenciadoComUsuarios(){
         return credenciadoRepository.findAll()
                 .stream()
                 .map(credenciadoMapper::toCredenciadoFetchUsuariosDTO)
