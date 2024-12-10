@@ -47,4 +47,11 @@ public class GlobalHandlerException {
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(InvalidArgumentException.class)
+    public ResponseEntity<Map<String, String>> handleInvalidArgumentException(InvalidArgumentException ex){
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("message", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
 }
