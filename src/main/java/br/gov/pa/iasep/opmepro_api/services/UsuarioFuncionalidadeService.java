@@ -15,6 +15,8 @@ import br.gov.pa.iasep.opmepro_api.repositories.UsuarioFuncionalidadeRepository;
 import br.gov.pa.iasep.opmepro_api.repositories.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,9 +46,10 @@ public class UsuarioFuncionalidadeService {
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
         List<UsuarioFuncionalidade> funcionalidades = usuarioFuncionalidadeRepository.findByUsuario(usuario)
-                .orElse(null);
+                .orElse(Collections.emptyList());
 
-        return funcionalidades.stream()
+        return funcionalidades
+                .stream()
                 .map(usuarioFuncionalidadeMapper::toUsuarioFuncionalidadeResponseUsuarioDTO)
                 .collect(Collectors.toList());
     }
@@ -70,7 +73,12 @@ public class UsuarioFuncionalidadeService {
             usuarioFunc.setFuncionalidade(funcionalidade);
             usuarioFunc.setUsuario(usuario);
             usuarioFunc.setLeitura(funcionalidadeRequest.leitura());
-            usuarioFunc.setEscrita(funcionalidadeRequest.escrita());
+
+            if(funcionalidadeRequest.leitura()) {
+                usuarioFunc.setEscrita(funcionalidadeRequest.escrita());
+            } else {
+                usuarioFunc.setEscrita(false);
+            }
 
             usuarioFuncionalidadeRepository.save(usuarioFunc);
         }
