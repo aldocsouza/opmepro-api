@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "procedimentos")
+@Table(name = "procedimento")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,7 +20,6 @@ public class Procedimento extends BaseProcedimento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cod_procedimentos")
     private Integer id;
 
     @OneToMany(mappedBy = "procedimento")
