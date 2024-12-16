@@ -12,6 +12,9 @@ public abstract class BaseSegurado {
     @Column(name = "cpf", nullable = false)
     protected String cpf;
 
+    @Column(name = "termo_adesao", nullable = false)
+    protected String termoAdesao;
+
     @Column(name = "ind_sexo")
     protected String sexo;
 
@@ -27,9 +30,10 @@ public abstract class BaseSegurado {
     @Column(name = "uf")
     protected String uf;
 
-    public BaseSegurado(String nomeSegurado, String cpf, String sexo, Boolean status, String situacao, String municipio, String uf) {
+    public BaseSegurado(String nomeSegurado, String cpf, String termoAdesao, String sexo, Boolean status, String situacao, String municipio, String uf) {
         this.nomeSegurado = nomeSegurado;
         this.cpf = cpf;
+        this.termoAdesao = termoAdesao;
         this.sexo = sexo;
         this.status = status;
         this.situacao = situacao;
@@ -94,5 +98,13 @@ public abstract class BaseSegurado {
 
     public void setUf(String uf) {
         this.uf = uf;
+    }
+
+    public String getTermoAdesao() {
+        return termoAdesao;
+    }
+
+    public void setTermoAdesao(String termoAdesao) {
+        this.termoAdesao = termoAdesao;
     }
 }

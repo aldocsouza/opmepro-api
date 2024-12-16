@@ -24,15 +24,15 @@ public class Segurado extends BaseSegurado {
     @OneToMany(mappedBy = "segurado")
     private List<SeguradoHistorico> seguradoHistoricoList = new ArrayList<>();
 
-    public Segurado(String nomeSegurado, String cpf, String sexo, Boolean status, String situacao, String municipio, String uf, Integer id, List<Solicitacao> solicitacaoList, List<SeguradoHistorico> seguradoHistoricoList) {
-        super(nomeSegurado, cpf, sexo, status, situacao, municipio, uf);
+    public Segurado(String nomeSegurado, String cpf, String termoAdesao, String sexo, Boolean status, String situacao, String municipio, String uf, Integer id, List<Solicitacao> solicitacaoList, List<SeguradoHistorico> seguradoHistoricoList) {
+        super(nomeSegurado, cpf, termoAdesao, sexo, status, situacao, municipio, uf);
         this.id = id;
         this.solicitacaoList = solicitacaoList;
         this.seguradoHistoricoList = seguradoHistoricoList;
     }
 
-    public Segurado(String nomeSegurado, String cpf, String sexo, Boolean status, String situacao, String municipio, String uf, List<Solicitacao> solicitacaoList, List<SeguradoHistorico> seguradoHistoricoList) {
-        super(nomeSegurado, cpf, sexo, status, situacao, municipio, uf);
+    public Segurado(String nomeSegurado, String cpf, String termoAdesao, String sexo, Boolean status, String situacao, String municipio, String uf, List<Solicitacao> solicitacaoList, List<SeguradoHistorico> seguradoHistoricoList) {
+        super(nomeSegurado, cpf, termoAdesao, sexo, status, situacao, municipio, uf);
         this.solicitacaoList = solicitacaoList;
         this.seguradoHistoricoList = seguradoHistoricoList;
     }
