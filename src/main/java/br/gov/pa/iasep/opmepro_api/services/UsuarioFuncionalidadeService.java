@@ -83,7 +83,7 @@ public class UsuarioFuncionalidadeService {
             usuarioFuncionalidadeRepository.save(usuarioFunc);
         }
 
-        return new ApiResponse("Cadastro realizado com sucesso!", true);
+        return new ApiResponse("Funcionalidades foram atribuidas com sucesso!", true);
     }
 
 }

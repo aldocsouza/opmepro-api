@@ -1,7 +1,6 @@
 package br.gov.pa.iasep.opmepro_api.model.entities;
 
 import br.gov.pa.iasep.opmepro_api.base.BaseUsuario;
-import br.gov.pa.iasep.opmepro_api.model.dtos.UsuarioDTOs.UsuarioPerfilResumidoDTO;
 import br.gov.pa.iasep.opmepro_api.model.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -74,7 +73,7 @@ public class Usuario extends BaseUsuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.perfil.equals(UserRole.ADMIN)) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        if(this.perfil.equals(UserRole.ADMINISTRADOR)) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
         else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
