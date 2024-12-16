@@ -31,6 +31,7 @@ public class TokenService {
                     .withClaim("telefone", usuario.getTelefone())
                     .withClaim("email", usuario.getEmail())
                     .withClaim("perfil", usuario.getPerfil().getDescricao())
+                    .withClaim("tipoUsuario", usuario.getPerfil().getTipoUsuario())
                     .withClaim("situacao", usuario.getSituacao())
                     .withExpiresAt(generateExpirationDate());
 
