@@ -25,6 +25,11 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.OK).body(usuarioService.obterUsuariosResumidos());
     }
 
+    @GetMapping("/resumido/{id}")
+    public ResponseEntity<UsuarioResumidoDTO> obterUsuarioResumidoPorID(@PathVariable("id") Integer id){
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.obterUsuarioResumidoPorID(id));
+    }
+
     @GetMapping("/detalhado/{id}")
     public ResponseEntity<UsuarioDetalhadoDTO> obterUsuarioDetalhado(@PathVariable("id") Integer id){
         UsuarioDetalhadoDTO response = usuarioService.obterUsuarioDetalhado(id);

@@ -32,6 +32,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET, "/api/funcionalidades/resumidos").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/funcionalidades/detalhado/{id}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/usuarios/resumidos").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/usuarios/resumido/{id}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/usuarios/detalhado/{id}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/usuarios/{id}/credenciado").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/usuarios/perfis").permitAll()

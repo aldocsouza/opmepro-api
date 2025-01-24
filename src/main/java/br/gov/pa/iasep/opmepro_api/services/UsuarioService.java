@@ -44,9 +44,9 @@ public class UsuarioService {
     }
 
     public UsuarioDetalhadoDTO obterUsuarioDetalhado(Integer id){
-        Usuario usuario = usuarioRepository.findById(id)
+        return usuarioRepository.findById(id)
+                .map(userMapper::toUsuarioDetalhadoDTO)
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado!"));
-        return userMapper.toUsuarioDetalhadoDTO(usuario);
     }
 
     public List<UsuarioResumidoDTO> obterUsuariosResumidos(){
@@ -54,6 +54,12 @@ public class UsuarioService {
                 .stream()
                 .map(userMapper::toUsuarioDTO)
                 .toList();
+    }
+
+    public UsuarioResumidoDTO obterUsuarioResumidoPorID(Integer id){
+        return usuarioRepository.findById(id)
+                .map(userMapper::toUsuarioDTO)
+                .orElseThrow(() -> new NotFoundException("Usuário não encontrado com base no ID informado"));
     }
 
     public List<UsuarioComFuncionalidadesDTO> obterUsuariosComFuncionalidades(){
