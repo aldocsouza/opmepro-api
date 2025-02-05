@@ -16,6 +16,8 @@ import java.util.Arrays;
 @EnableWebMvc
 public class WebConfig {
 
+
+
     @Bean
     public FilterRegistrationBean corsFilter(){
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
